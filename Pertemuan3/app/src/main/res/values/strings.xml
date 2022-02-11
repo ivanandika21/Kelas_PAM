@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Pertemuan 3</string>
-    <string name="txtUsername">Username</string>
-    <string name="txtPassword">Password</string>
-    <string name="btnLogin">Masuk</string>
-    <string name="txtLogin">txt loginnn</string>
-    <string name="txtHello">Hello [Name]</string>
-</resources>
