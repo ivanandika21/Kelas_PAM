@@ -1,89 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="25dp"
+    android:gravity="center"
     tools:context=".MainActivity">
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/icLogo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center">
 
-        <LinearLayout
-            android:id="@+id/icLogo"
+        <!--  bagian logo iCat  -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profil_dark"
+            />
+    </LinearLayout>
+
+    <!--  bagian teks header "Masuk"  -->
+    <TextView
+        android:id="@+id/txtMasuk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icLogo"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:text="@string/txtMasuk"
+        android:textColor="@color/gray"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <!--  bagian input email dan kata sandi  -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputNamaPengguna"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtNamaPengguna"
+        android:layout_below="@+id/txtMasuk"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:paddingBottom="10dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:inputType="text"
+            />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/profil_dark" />
-        </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputKataSandi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtKataSandi"
+        android:layout_below="@+id/txtInputNamaPengguna"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <TextView
-            android:id="@+id/masuk"
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/icLogo"
-            android:layout_marginVertical="20dp"
-            android:gravity="center"
-            android:text="Masuk"
-            android:textColor="@color/gray"
-            android:textSize="36dp"
-            android:textStyle="bold" />
+            android:inputType="textPassword" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtInputUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Alamat email"
-            android:layout_below="@+id/masuk"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:paddingBottom="10dp"
-            >
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                />
+    <!--  bagian tombol masuk  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lupaSandi"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txtMasuk" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtInputPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Kata sandi"
-            android:layout_below="@+id/txtInputUsername"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <!--  bagian redirect ke activity_daftar  -->
+    <TextView
+        android:id="@+id/lupaSandi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtInputKataSandi"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:text="Belum punya akun?" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnMasuk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/lupaSandi"
-            android:layout_centerHorizontal="true"
-            android:text="Masuk" />
-
-        <TextView
-            android:id="@+id/lupaSandi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txtInputPassword"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            android:text="Belum punya akun?" />
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>
