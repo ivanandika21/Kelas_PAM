@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
@@ -18,7 +21,7 @@ public class BerandaActivity extends AppCompatActivity {
     private ImageSwitcher carouselImage;
 
     int index = 0;
-    int indexImg[] = {R.drawable.banner1, R.drawable.banner2, R.drawable.banner3};
+    int indexImg[] = {R.drawable.frame1, R.drawable.frame2, R.drawable.frame3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +70,8 @@ public class BerandaActivity extends AppCompatActivity {
             public View makeView() {
                 ImageView imageView = new ImageView(getApplicationContext());
                 imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-//                imageView.setMaxWidth(250);
-//                imageView.setMaxHeight(250);
+                imageView.setMaxWidth(250);
+                imageView.setMaxHeight(250);
 
                 return imageView;
             }
