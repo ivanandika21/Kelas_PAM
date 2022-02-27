@@ -1,109 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
+    <!--  Fixed  -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:liftOnScroll="true"
+        android:paddingHorizontal="10dp"
+        android:background="@color/white"
         >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             app:titleTextColor="@color/blue"
             />
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <!--  Scrollable  -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         >
-
+        <!--  ParentLayout  -->
         <RelativeLayout
-            android:id="@+id/section1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/imageProfil"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/profil_user"
-                android:layout_margin="10dp"
-                />
-
-            <!--  bagian teks input email  -->
+            android:layout_height="wrap_content"
+            >
+            <!-- Section 1: Username, Alamat, Foto Profil -->
             <RelativeLayout
+                android:id="@+id/section1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/imageProfil"
-                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="10dp"
+                >
+                <!--  ChildLayout: Image rounded profil  -->
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/imageProfil"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/profil_user" />
+
+                <!--  ChildLayout: Teks Halo username dan alamat  -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageProfil">
+
+                    <!--  Halo + username  -->
+                    <TextView
+                        android:id="@+id/txtHello"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Halo, "
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+
+                    <!--  Alamat  -->
+                    <TextView
+                        android:id="@+id/txtAlamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtHello"
+                        android:text="Kec. Sidomukti Salatiga"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <!--  Section 2: Carousel  -->
+            <RelativeLayout
+                android:id="@+id/section2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@+id/section1"
+                android:gravity="center"
+                >
+
+                <!--  Image switcher  -->
+                <ImageSwitcher
+                    android:id="@+id/carouselImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inAnimation="@android:anim/fade_in"
+                    android:outAnimation="@android:anim/fade_out"
+                    />
+
+                <!--  Button before  -->
+                <ImageButton
+                    android:id="@+id/carouselBefore"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_before"
+                    android:layout_alignStart="@+id/carouselImage"
+                    android:layout_centerVertical="true"
+                    />
+
+                <!--  Button next  -->
+                <ImageButton
+                    android:id="@+id/carouselNext"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_next"
+                    android:layout_alignEnd="@+id/carouselImage"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+
+            <!--  Section 3: Kategori  -->
+            <RelativeLayout
+                android:id="@+id/section3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/section2"
+                android:layout_margin="10dp"
+                >
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:rowCount="2">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_gravity="fill"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="10dp"
+                        android:elevation="8dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_home"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Home"
+                                android:textAlignment="center"
+                                />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:layout_gravity="fill"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_margin="10dp"
+                        android:elevation="8dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_home"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Home"
+                                android:textAlignment="center"
+                                />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </GridLayout>
+            </RelativeLayout>
+
+            <!--  Section 4: Berita  -->
+            <RelativeLayout
+                android:id="@+id/section4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/section3"
                 >
 
                 <TextView
-                    android:id="@+id/txtHello"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Halo, "
-                    android:textStyle="bold"
-                    android:textSize="22sp"
-                    />
-                <TextView
-                    android:id="@+id/txtAlamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Kec. Sidomukti Salatiga"
-                    android:textSize="14sp"
-                    android:layout_below="@+id/txtHello"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="AAAAAAAAAAAAAAAAAAAAA"
+                    android:textSize="30dp"
+                    android:paddingVertical="200dp"
                     />
             </RelativeLayout>
         </RelativeLayout>
+    </ScrollView>
 
-        <!--  carousel  -->
-        <RelativeLayout
-            android:id="@+id/section2"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@+id/section1"
-            android:gravity="center"
-            >
+<!--    Testing scroll -->
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"-->
+<!--        >-->
 
-            <ImageSwitcher
-                android:id="@+id/carouselImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inAnimation="@android:anim/fade_in"
-                android:outAnimation="@android:anim/fade_out"
-                />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingVertical="600dp"-->
+<!--            />-->
+<!--    </androidx.core.widget.NestedScrollView>-->
 
-            <ImageButton
-                android:id="@+id/carouselBefore"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_before"
-                android:layout_alignStart="@+id/carouselImage"
-                android:layout_centerVertical="true"
-                />
-
-            <ImageButton
-                android:id="@+id/carouselNext"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_next"
-                android:layout_alignEnd="@+id/carouselImage"
-                android:layout_centerVertical="true"
-                />
-        </RelativeLayout>
-    </RelativeLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
