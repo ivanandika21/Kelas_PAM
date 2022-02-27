@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="25dp"
     >
 
     <!--  bagian teks input email  -->
@@ -17,6 +18,39 @@
     <!--  bagian bar navigasi bawah  -->
 
     <!--  carousel  -->
-    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtHello"
+        android:gravity="center"
+        >
 
+        <ImageButton
+            android:id="@+id/carouselBefore"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_before"
+            android:layout_alignStart="@+id/carouselImage"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageSwitcher
+            android:id="@+id/carouselImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right"
+            />
+
+        <ImageButton
+            android:id="@+id/carouselNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_next"
+            android:layout_alignEnd="@+id/carouselImage"
+            android:layout_centerVertical="true"
+            />
+    </LinearLayout>
 </RelativeLayout>
