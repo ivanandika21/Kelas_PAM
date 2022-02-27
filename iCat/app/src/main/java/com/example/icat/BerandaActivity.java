@@ -1,9 +1,11 @@
 package com.example.icat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -20,6 +22,8 @@ public class BerandaActivity extends AppCompatActivity {
     private ImageButton carouselBefore, carouselNext;
     private ImageSwitcher carouselImage;
 
+    private Toolbar main_toolbar;
+
     int index = 0;
     int indexImg[] = {R.drawable.frame1, R.drawable.frame2, R.drawable.frame3};
 
@@ -34,7 +38,7 @@ public class BerandaActivity extends AppCompatActivity {
         String user;
         Intent intent = getIntent();
         user = intent.getStringExtra("user");
-
+        user = user.substring(0, 1).toUpperCase() + user.substring(1);
         txtHello.append(user);
 
 
@@ -57,7 +61,7 @@ public class BerandaActivity extends AppCompatActivity {
         carouselNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                index++;
+                ++index;
                 if (index == indexImg.length){
                     index = 0;
                 }
@@ -69,14 +73,26 @@ public class BerandaActivity extends AppCompatActivity {
             @Override
             public View makeView() {
                 ImageView imageView = new ImageView(getApplicationContext());
-                imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                imageView.setMaxWidth(250);
-                imageView.setMaxHeight(250);
-
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setMaxWidth(1000);
+                imageView.setMaxHeight(600);
                 return imageView;
             }
         });
 
         carouselImage.setImageResource(indexImg[index]);
+
+        // Codingan Toolbar
+        main_toolbar = findViewById(R.id.main_toolbar);
+        main_toolbar.setTitle("Beranda");
+        setSupportActionBar(main_toolbar);
+    }
+
+    // Codingan Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }
