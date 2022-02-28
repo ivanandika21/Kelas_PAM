@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/ic_add.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/ic_before.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_beranda.xml" value="0.22" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/ic_next.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_beranda.xml" value="0.2" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/menu/bottom_menu.xml" value="0.19375" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/menu/main_menu.xml" value="0.33" />
       </map>
     </option>

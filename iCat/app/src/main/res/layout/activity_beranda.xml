@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     >
 
-    <!--  Fixed  -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:liftOnScroll="true"
-        android:paddingHorizontal="10dp"
-        android:background="@color/white"
-        >
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleTextColor="@color/blue"
-            />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <!--  Scrollable  -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingVertical="50dp"
         >
         <!--  ParentLayout  -->
         <RelativeLayout
@@ -61,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Halo, "
-                        android:textSize="22sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <!--  Alamat  -->
@@ -117,37 +101,49 @@
             </RelativeLayout>
 
             <!--  Section 3: Kategori  -->
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/section3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/section2"
+                android:orientation="vertical"
                 android:layout_margin="10dp"
                 >
 
-                <GridLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:rowCount="2">
+                    android:text="Menu"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:layout_row="0"
-                        android:layout_column="0"
-                        android:layout_gravity="fill"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="10dp"
-                        android:elevation="8dp">
+                <LinearLayout
+                    android:id="@+id/section4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/blue"
+                        android:layout_marginHorizontal="10dp"
+                        >
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:layout_margin="20dp"
+                            >
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -162,25 +158,26 @@
                                 android:textAlignment="center"
                                 />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:layout_row="0"
-                        android:layout_column="1"
-                        android:layout_gravity="fill"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="10dp"
-                        android:elevation="8dp">
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/blue"
+                        android:layout_marginHorizontal="10dp"
+                        >
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_gravity="center"
-                            android:gravity="center">
+                            android:gravity="center"
+                            android:layout_margin="20dp"
+                            >
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -195,41 +192,213 @@
                                 android:textAlignment="center"
                                 />
                         </LinearLayout>
-                    </androidx.cardview.widget.CardView>
-                </GridLayout>
-            </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
 
-            <!--  Section 4: Berita  -->
-            <RelativeLayout
-                android:id="@+id/section4"
-                android:layout_width="match_parent"
+            <!--  Section 4: Info Update  -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/section3"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="AAAAAAAAAAAAAAAAAAAAA"
-                    android:textSize="30dp"
-                    android:paddingVertical="200dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update iCat"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
                     />
-            </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/blue"
+                        android:layout_marginVertical="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/frame1"
+                                android:scaleType="centerInside"
+                                android:adjustViewBounds="true"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                >
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grooming bulu tebal?"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="iCat blablabla lorem ipsum dolor sit amet bla bla bla iya itu engga tapi iya"
+                                    android:textSize="16sp"
+                                    />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/frame1" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/blue"
+                        android:layout_marginVertical="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                >
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grooming bulu tebal?"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="iCat blablabla lorem ipsum dolor sit amet bla bla bla iya itu engga tapi iya"
+                                    android:textSize="16sp"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="5dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="@color/blue"
+                        android:layout_marginVertical="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            >
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/frame1"
+                                android:scaleType="centerInside"
+                                android:adjustViewBounds="true"
+                                />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                >
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Grooming bulu tebal?"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="iCat blablabla lorem ipsum dolor sit amet bla bla bla iya itu engga tapi iya"
+                                    android:textSize="16sp"
+                                    />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
-<!--    Testing scroll -->
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"-->
-<!--        >-->
+    <!--  Fixed  -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true"
+        android:paddingHorizontal="10dp"
+        android:background="@color/white"
+        >
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingVertical="600dp"-->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/blue"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_menu"
+        android:background="@android:color/transparent"
+        android:backgroundTint="@android:color/transparent"
+
+        />
+
+<!--        <ImageButton-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:src="@drawable/ic_home"-->
+<!--            android:background="@android:color/transparent"-->
 <!--            />-->
-<!--    </androidx.core.widget.NestedScrollView>-->
+<!--        <ImageButton-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:src="@drawable/ic_home"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            />-->
 
-</LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:layout_anchor="@id/bottom_toolbar"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
