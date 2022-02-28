@@ -81,8 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inAnimation="@android:anim/fade_in"
-                    android:outAnimation="@android:anim/fade_out"
-                    />
+                    android:outAnimation="@android:anim/fade_out" />
 
                 <!--  Button before  -->
                 <ImageButton
@@ -136,7 +135,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         app:cardCornerRadius="5dp"
                         app:strokeWidth="0dp"
                         app:strokeColor="@color/blue"
@@ -171,7 +170,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         app:cardCornerRadius="5dp"
                         app:strokeWidth="0dp"
                         app:strokeColor="@color/blue"
