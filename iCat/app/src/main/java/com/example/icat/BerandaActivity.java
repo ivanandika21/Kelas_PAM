@@ -16,11 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class BerandaActivity extends AppCompatActivity {
 
     private TextView txtHello;
     private ImageButton carouselBefore, carouselNext;
     private ImageSwitcher carouselImage;
+    private FloatingActionButton btn_add;
+    private MaterialCardView btn_pesanan;
 
     private Toolbar main_toolbar;
 
@@ -81,6 +86,25 @@ public class BerandaActivity extends AppCompatActivity {
         });
 
         carouselImage.setImageResource(indexImg[index]);
+
+        btn_add = findViewById(R.id.btn_add);
+
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BerandaActivity.this, TambahActivity.class));
+            }
+        });
+
+        btn_pesanan = findViewById(R.id.btn_pesanan);
+
+        btn_pesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BerandaActivity.this, PesananActivity.class));
+            }
+        });
+
 
         // Codingan Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);

@@ -41,7 +41,7 @@
         android:hint="@string/txtNamaPengguna"
         android:layout_below="@+id/txtMasuk"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:paddingBottom="10dp"
+        android:layout_marginBottom="10dp"
         >
 
         <com.google.android.material.textfield.TextInputEditText

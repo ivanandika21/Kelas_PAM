@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICat">
         <activity
+            android:name=".TambahActivity"
+            android:exported="false" />
+        <activity
             android:name=".PesananActivity"
             android:exported="false" />
         <activity
