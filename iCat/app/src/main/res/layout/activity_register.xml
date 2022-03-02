@@ -22,13 +22,13 @@
 
     <!--  bagian teks header "Masuk"  -->
     <TextView
-        android:id="@+id/txtMasuk"
+        android:id="@+id/txtRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/icLogo"
         android:layout_marginVertical="20dp"
         android:gravity="center"
-        android:text="@string/txtMasuk"
+        android:text="@string/txtRegister"
         android:textColor="@color/gray"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/txtNamaPengguna"
-        android:layout_below="@+id/txtMasuk"
+        android:layout_below="@+id/txtRegister"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_marginBottom="10dp"
         >
@@ -49,26 +49,38 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txtInputAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtAlamat"
+        android:layout_below="@+id/txtInputNamaPengguna"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginBottom="10dp">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtInputKataSandi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/txtKataSandi"
-        android:layout_below="@+id/txtInputNamaPengguna"
+        android:layout_below="@+id/txtInputAlamat"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!--  bagian redirect ke activity_daftar  -->
+    <!--  bagian redirect ke activity_main  -->
     <TextView
-        android:id="@+id/keRegis"
+        android:id="@+id/keLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txtInputKataSandi"
@@ -81,12 +93,10 @@
 
     <!--  bagian tombol masuk  -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnMasuk"
+        android:id="@+id/btnRegis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/keRegis"
+        android:layout_below="@id/keLogin"
         android:layout_centerHorizontal="true"
-        android:text="@string/txtMasuk" />
-
-
+        android:text="@string/txtRegister" />
 </RelativeLayout>

@@ -24,7 +24,6 @@ public class PesananActivity extends AppCompatActivity {
 
     private Toolbar main_toolbar;
     private RecyclerView recyclerView;
-    private Button btn_tambah;
     private AppDatabase database;
     private UserAdapter userAdapter;
     private List<User> list = new ArrayList<>();
@@ -70,19 +69,10 @@ public class PesananActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
-
-        btn_tambah = findViewById(R.id.btn_tambah);
-        btn_tambah.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PesananActivity.this, TambahActivity.class));
-            }
-        });
-
-
+        
         // Codingan Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);
-        main_toolbar.setTitle("Buat Pesanan");
+        main_toolbar.setTitle("Daftar Pesanan");
         setSupportActionBar(main_toolbar);
 
     }

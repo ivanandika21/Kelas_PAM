@@ -1,9 +1,11 @@
 package com.example.icat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class TambahActivity extends AppCompatActivity {
 
+    private Toolbar main_toolbar;
     private TextInputEditText full_name, email;
     private Button btn_save;
     private AppDatabase database;
@@ -27,6 +30,11 @@ public class TambahActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         btn_save = findViewById(R.id.btn_save);
         database = AppDatabase.getInstance(getApplicationContext());
+
+        // Codingan Toolbar
+        main_toolbar = findViewById(R.id.main_toolbar);
+        main_toolbar.setTitle("Buat Pesanan");
+        setSupportActionBar(main_toolbar);
 
         Intent intent = getIntent();
         uid = intent.getIntExtra("uid", 0);
@@ -53,5 +61,13 @@ public class TambahActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    // Codingan Toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }

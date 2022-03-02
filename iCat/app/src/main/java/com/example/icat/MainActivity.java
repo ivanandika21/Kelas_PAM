@@ -11,7 +11,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView txtMasuk;
+    private TextView txtMasuk, keRegis;
     private TextInputLayout txtInputNamaPengguna, txtInputKataSandi;
     private Button btnMasuk;
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         txtInputNamaPengguna = findViewById(R.id.txtInputNamaPengguna);
         txtInputKataSandi = findViewById(R.id.txtInputKataSandi);
         btnMasuk = findViewById(R.id.btnMasuk);
+        keRegis = findViewById(R.id.keRegis);
 
         // memberi event ke button login
         btnMasuk.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentToBeranda = new Intent(MainActivity.this, BerandaActivity.class);
                 intentToBeranda.putExtra("user", user);
                 startActivity(intentToBeranda);
+            }
+        });
+
+        keRegis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">iCat</string>
     <string name="txtMasuk">Masuk</string>
+    <string name="txtRegister">Registrasi</string>
     <string name="txtNamaPengguna">Nama Pengguna</string>
     <string name="txtKataSandi">Kata Sandi</string>
+    <string name="txtAlamat">Alamat</string>
 </resources>
