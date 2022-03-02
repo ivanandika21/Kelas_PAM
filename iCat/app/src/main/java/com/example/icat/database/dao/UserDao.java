@@ -14,14 +14,11 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     List<User> getAll();
 
-    @Query("INSERT INTO user (name,email) VALUES(:name,:email)")
-    void insertAll(String name, String email);
+    @Query("SELECT * FROM user WHERE pesanan_id=:pesanan_id")
+    User get(int pesanan_id);
 
-    @Query("UPDATE user SET name=:name, email=:email WHERE uid=:uid")
-    void update(int uid, String name, String email);
-
-    @Query("SELECT * FROM user WHERE uid=:uid")
-    User get(int uid);
+    @Query("INSERT INTO user (jenis_layanan,jenis_kucing, isAntarJemput) VALUES(:jenis_layanan,:jenis_kucing,:isAntarJemput)")
+    void insertAll(String jenis_layanan, String jenis_kucing, String isAntarJemput);
 
     @Delete
     void delete(User user);

@@ -13,7 +13,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.icat.database.dao.UserDao;
 import com.example.icat.database.entitas.User;
 
-@Database(entities = {User.class}, version = 2)
+@Database(entities = {User.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase sInstance;
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();

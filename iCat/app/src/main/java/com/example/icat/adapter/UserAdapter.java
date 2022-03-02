@@ -42,8 +42,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewAdapter holder, int position) {
-        holder.full_name.setText(list.get(position).fullName);
-        holder.email.setText(list.get(position).email);
+        holder.jenis_layanan.setText(list.get(position).jenis_layanan);
+        holder.jenis_kucing.setText(list.get(position).jenis_kucing);
+        holder.isAntarJemput.setText(list.get(position).isAntarJemput);
     }
 
     @Override
@@ -53,13 +54,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
 
     class ViewAdapter extends RecyclerView.ViewHolder {
 
-        TextView full_name, email;
+        TextView jenis_layanan, jenis_kucing, isAntarJemput;
 
         public ViewAdapter(@NonNull View itemView) {
             super(itemView);
 
-            full_name = itemView.findViewById(R.id.full_name);
-            email = itemView.findViewById(R.id.email);
+            jenis_layanan = itemView.findViewById(R.id.jenis_layanan);
+            jenis_kucing = itemView.findViewById(R.id.jenis_kucing);
+            isAntarJemput = itemView.findViewById(R.id.isAntarJemput);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

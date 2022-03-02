@@ -43,23 +43,14 @@ public class PesananActivity extends AppCompatActivity {
         userAdapter.setDialog(new UserAdapter.Dialog() {
             @Override
             public void onClick(int position) {
-                final CharSequence[] dialogItem = {"Edit", "Hapus"};
+                final CharSequence[] dialogItem = {"Hapus"};
                 dialog = new AlertDialog.Builder(PesananActivity.this);
                 dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        switch (i) {
-                            case 0:
-                                Intent intent = new Intent(PesananActivity.this, TambahActivity.class);
-                                intent.putExtra("uid", list.get(position).uid);
-                                startActivity(intent);
-                                break;
-                            case 1 :
-                                User user = list.get(position);
-                                database.userDao().delete(user);
-                                onStart();
-                                break;
-                        }
+                        User user = list.get(position);
+                        database.userDao().delete(user);
+                        onStart();
                     }
                 });
                 dialog.show();
@@ -69,15 +60,15 @@ public class PesananActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
-        
-        // Codingan Toolbar
+
+        // Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);
         main_toolbar.setTitle("Daftar Pesanan");
         setSupportActionBar(main_toolbar);
 
     }
 
-    // Codingan Toolbar
+    // Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

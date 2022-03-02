@@ -37,26 +37,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Health Grooming" />
-                <CheckBox
-                    android:id="@+id/layanan4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Herbal Grooming" />
-                <CheckBox
-                    android:id="@+id/layanan5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lion Cut" />
-                <CheckBox
-                    android:id="@+id/layanan6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contest Preparation" />
-                <CheckBox
-                    android:id="@+id/layanan7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Penginapan" />
 
                 <RadioGroup
                     android:id="@+id/bulu"
@@ -101,46 +81,17 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nama Lengkap"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="10dp"
-                >
+                android:gravity="center">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/full_name"
-                    android:layout_width="match_parent"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Alamat Email"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="10dp"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_save"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="Simpan" />
+                    android:text="Simpan" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

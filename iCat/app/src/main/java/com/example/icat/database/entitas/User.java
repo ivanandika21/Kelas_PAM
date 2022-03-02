@@ -1,16 +1,16 @@
 package com.example.icat.database.entitas;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
     @PrimaryKey
-    public int uid;
+    public int pesanan_id;
 
-    @ColumnInfo(name = "name")
-    public String fullName;
+    public String jenis_layanan;
 
-    public String email;
+    public String jenis_kucing;
+
+    public String isAntarJemput;
 }
