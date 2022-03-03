@@ -34,11 +34,10 @@ public class PesananActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesanan);
 
-        recyclerView = findViewById(R.id.recycler_view);
-
         database = AppDatabase.getInstance(getApplicationContext());
         list.clear();
         list.addAll(database.userDao().getAll());
+
         userAdapter = new UserAdapter(getApplicationContext(), list);
         userAdapter.setDialog(new UserAdapter.Dialog() {
             @Override
@@ -57,18 +56,17 @@ public class PesananActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
 
-        // Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);
         main_toolbar.setTitle("Daftar Pesanan");
         setSupportActionBar(main_toolbar);
 
     }
 
-    // Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

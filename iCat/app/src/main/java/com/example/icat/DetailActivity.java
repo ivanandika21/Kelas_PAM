@@ -9,9 +9,9 @@ import android.widget.Toast;
 
 public class DetailActivity extends AppCompatActivity {
 
-    ImageView mainImage;
-    TextView judul, deskripsi;
-    String info1, info2;
+    private ImageView mainImage;
+    private TextView tanggal, judul, deskripsi;
+    private String info1, info2, info3;
     int images;
 
     @Override
@@ -20,6 +20,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         mainImage = findViewById(R.id.mainImage);
+        tanggal = findViewById(R.id.tanggal);
         judul = findViewById(R.id.judul);
         deskripsi = findViewById(R.id.deskripsi);
 
@@ -28,9 +29,11 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        if (getIntent().hasExtra("images") && getIntent().hasExtra("info1") && getIntent().hasExtra("info2")) {
+        if (getIntent().hasExtra("images") && getIntent().hasExtra("info1")
+                && getIntent().hasExtra("info2") && getIntent().hasExtra("info3")) {
             info1 = getIntent().getStringExtra("info1");
             info2 = getIntent().getStringExtra("info2");
+            info3 = getIntent().getStringExtra("info3");
             images = getIntent().getIntExtra("images", 1);
         } else {
             Toast.makeText(this, "Tidak ada data",Toast.LENGTH_SHORT).show();
@@ -38,8 +41,9 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        judul.setText(info1);
-        deskripsi.setText(info2);
+        tanggal.setText(info1);
+        judul.setText(info2);
+        deskripsi.setText(info3);
         mainImage.setImageResource(images);
     }
 }

@@ -16,15 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.icat.DetailActivity;
 import com.example.icat.R;
 
-public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyViewHolder> {
-    String info1[], info2[];
+public class InfoAdapter extends RecyclerView.Adapter < InfoAdapter.MyViewHolder > {
+    String info1[], info2[], info3[];
     int images[];
     Context context;
 
-    public InfoAdapter(Context ct, String judul[], String deskripsi[], int img[]) {
+    public InfoAdapter(Context ct, String tanggal[], String judul[], String deskripsi[], int img[]) {
         context = ct;
-        info1 = judul;
-        info2 = deskripsi;
+        info1 = tanggal;
+        info2 = judul;
+        info3 = deskripsi;
         images = img;
     }
 
@@ -39,8 +40,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.judul.setText(info1[position]);
-        holder.deskripsi.setText(info2[position]);
+        holder.tanggal.setText(info1[position]);
+        holder.judul.setText(info2[position]);
+        holder.deskripsi.setText(info3[position]);
         holder.images.setImageResource(images[position]);
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +51,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyViewHolder> 
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("info1", info1[position]);
                 intent.putExtra("info2", info2[position]);
+                intent.putExtra("info3", info3[position]);
                 intent.putExtra("images", images[position]);
                 context.startActivity(intent);
             }
@@ -63,12 +66,13 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.MyViewHolder> 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView judul, deskripsi;
+        TextView tanggal, judul, deskripsi;
         ImageView images;
         LinearLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+            tanggal = itemView.findViewById(R.id.tanggal);
             judul = itemView.findViewById(R.id.judul);
             deskripsi = itemView.findViewById(R.id.deskripsi);
             images = itemView.findViewById(R.id.images);

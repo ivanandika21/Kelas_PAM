@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class RegisterActivity extends AppCompatActivity {
 
     private TextView keLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

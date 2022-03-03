@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:paddingVertical="60dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -29,7 +26,6 @@
                     android:textSize="18sp"
                     android:fontFamily="@font/mbold"
                     />
-
                 <CheckBox
                     android:id="@+id/layanan1"
                     android:layout_width="wrap_content"
@@ -46,13 +42,11 @@
                     android:layout_height="wrap_content"
                     android:text="Health Grooming" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingTop="10dp">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,13 +61,11 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:orientation="vertical">
-
                     <RadioButton
                         android:id="@+id/bulu1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Bulu Pendek" />
-
                     <RadioButton
                         android:id="@+id/bulu2"
                         android:layout_width="match_parent"
@@ -81,12 +73,10 @@
                         android:text="Bulu Panjang" />
                 </RadioGroup>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,13 +91,11 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:orientation="vertical">
-
                     <RadioButton
                         android:id="@+id/ya"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ya" />
-
                     <RadioButton
                         android:id="@+id/tidak"
                         android:layout_width="match_parent"
@@ -115,12 +103,10 @@
                         android:text="Tidak" />
                 </RadioGroup>
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center">
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_save"
                     android:layout_width="wrap_content"
@@ -129,7 +115,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
     <!--  Fixed  -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -138,7 +123,6 @@
         android:paddingHorizontal="10dp"
         android:background="@color/white"
         >
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"

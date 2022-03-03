@@ -6,6 +6,11 @@
     <string name="txtKataSandi">Kata Sandi</string>
     <string name="txtAlamat">Alamat</string>
 
+    <string-array name="tanggal">
+        <item>21/05/2022</item>
+        <item>20/05/2022</item>
+        <item>19/05/2022</item>
+    </string-array>
     <string-array name="judul">
         <item>Perubahan jadwal libur</item>
         <item>Layanan baru iCat!</item>

@@ -20,27 +20,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // menghubungkan layout view dengan java
         txtMasuk = findViewById(R.id.txtMasuk);
         txtInputNamaPengguna = findViewById(R.id.txtInputNamaPengguna);
         txtInputKataSandi = findViewById(R.id.txtInputKataSandi);
-        btnMasuk = findViewById(R.id.btnMasuk);
-        keRegis = findViewById(R.id.keRegis);
 
-        // memberi event ke button login
+        btnMasuk = findViewById(R.id.btnMasuk);
         btnMasuk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user;
                 user = txtInputNamaPengguna.getEditText().getText().toString();
 
-                // txtMasuk.getText().toString();
                 Intent intentToBeranda = new Intent(MainActivity.this, BerandaActivity.class);
                 intentToBeranda.putExtra("user", user);
                 startActivity(intentToBeranda);
             }
         });
 
+        keRegis = findViewById(R.id.keRegis);
         keRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

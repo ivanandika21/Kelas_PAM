@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/mainLayout">
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,6 +32,15 @@
                 android:orientation="vertical"
                 android:padding="10dp"
                 >
+                <TextView
+                    android:id="@+id/tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="string"
+                    android:fontFamily="@font/mmedium"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/blue"
+                    />
                 <TextView
                     android:id="@+id/judul"
                     android:layout_width="match_parent"

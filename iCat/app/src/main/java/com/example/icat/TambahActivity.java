@@ -32,17 +32,14 @@ public class TambahActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah);
+
         layanan1 = findViewById(R.id.layanan1);
         layanan2 = findViewById(R.id.layanan2);
         layanan3 = findViewById(R.id.layanan3);
 
-        bulu = findViewById(R.id.bulu);
-        antarjemput = findViewById(R.id.antarjemput);
-
-        btn_save = findViewById(R.id.btn_save);
-
         database = AppDatabase.getInstance(getApplicationContext());
 
+        bulu = findViewById(R.id.bulu);
         bulu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
@@ -57,6 +54,7 @@ public class TambahActivity extends AppCompatActivity {
             }
         });
 
+        antarjemput = findViewById(R.id.antarjemput);
         antarjemput.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int id) {
@@ -71,6 +69,7 @@ public class TambahActivity extends AppCompatActivity {
             }
         });
 
+        btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,13 +88,11 @@ public class TambahActivity extends AppCompatActivity {
             }
         });
 
-        // Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);
         main_toolbar.setTitle("Buat Pesanan");
         setSupportActionBar(main_toolbar);
     }
 
-    // Toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
