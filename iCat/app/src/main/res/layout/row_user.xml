@@ -23,6 +23,7 @@
                 android:id="@+id/pesanan_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/medium"
                 android:text="ID Pesanan"
                 android:textColor="@color/blue"
                 android:textStyle="bold"/>
@@ -30,16 +31,19 @@
                 android:id="@+id/jenis_layanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/medium"
                 android:text="Nama Lengkap"/>
             <TextView
                 android:id="@+id/jenis_kucing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/medium"
                 android:text="Email"/>
             <TextView
                 android:id="@+id/isAntarJemput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/medium"
                 android:text="Antar Jemput"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

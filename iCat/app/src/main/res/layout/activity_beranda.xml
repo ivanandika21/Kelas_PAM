@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:text="Halo, "
                         android:textSize="20sp"
-                        android:fontFamily="@font/mbold"
+                        android:fontFamily="@font/bold"
                         />
                     <!--  Alamat  -->
                     <TextView
@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txtHello"
-                        android:fontFamily="@font/mmedium"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/blue"
                         android:text="Kec. Sidomukti Salatiga" />
                 </RelativeLayout>
@@ -111,7 +111,7 @@
                     android:text="Menu"
                     android:textSize="18sp"
                     android:layout_margin="10dp"
-                    android:fontFamily="@font/mbold"
+                    android:fontFamily="@font/bold"
                     />
                 <LinearLayout
                     android:id="@+id/section4"
@@ -145,7 +145,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Grooming Kucingmu"
-                                android:fontFamily="@font/mmedium"
+                                android:fontFamily="@font/medium"
                                 />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -173,7 +173,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pembelian Vitamin"
-                                android:fontFamily="@font/mmedium"
+                                android:fontFamily="@font/medium"
                                 />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -192,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:text="Update iCat"
                     android:textSize="18sp"
-                    android:fontFamily="@font/mbold"
+                    android:fontFamily="@font/bold"
                     />
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyler_info"
@@ -215,6 +215,7 @@
             android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/medium"
             app:titleTextColor="@color/blue"
             />
     </com.google.android.material.appbar.AppBarLayout>

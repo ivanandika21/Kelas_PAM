@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="string"
-                    android:fontFamily="@font/mmedium"
+                    android:fontFamily="@font/medium"
                     android:paddingBottom="5dp"
                     android:textColor="@color/blue"
                     />
@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:text="string"
                     android:textSize="16sp"
-                    android:fontFamily="@font/mbold"
+                    android:fontFamily="@font/bold"
                     android:paddingBottom="5dp"
                     />
                 <TextView
@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="string"
-                    android:fontFamily="@font/mmedium"
+                    android:fontFamily="@font/medium"
                     />
             </LinearLayout>
         </LinearLayout>
