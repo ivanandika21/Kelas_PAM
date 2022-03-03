@@ -5,4 +5,15 @@
     <string name="txtNamaPengguna">Nama Pengguna</string>
     <string name="txtKataSandi">Kata Sandi</string>
     <string name="txtAlamat">Alamat</string>
+
+    <string-array name="judul">
+        <item>Perubahan jadwal libur</item>
+        <item>Layanan baru iCat!</item>
+        <item>Perkenalkan aku iChi!</item>
+    </string-array>
+    <string-array name="deskripsi">
+        <item>Halo Groomers, kami mohon maaf untuk jadwal libur akan kami pindah di hari Kamis, hanya untuk minggu ini saja ya! Terimakasih</item>
+        <item>Halo Groomers, iCat menyediakan layanan baru yaitu Health Grooming!</item>
+        <item>Haii, kami punya kucing baru nihh. Namanya iChi!</item>
+    </string-array>
 </resources>

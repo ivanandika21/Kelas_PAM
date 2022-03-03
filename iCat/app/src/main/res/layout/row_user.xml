@@ -2,28 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="10dp"
-    android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/jenis_layanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama Lengkap"/>
-    <TextView
-        android:id="@+id/jenis_kucing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email"/>
-    <TextView
-        android:id="@+id/isAntarJemput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Antar Jemput"/>
-    <ImageView
-        android:paddingTop="10dp"
+    >
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/line"/>
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        android:layout_marginVertical="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/pesanan_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Pesanan"
+                android:textColor="@color/blue"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/jenis_layanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Lengkap"/>
+            <TextView
+                android:id="@+id/jenis_kucing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"/>
+            <TextView
+                android:id="@+id/isAntarJemput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Antar Jemput"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

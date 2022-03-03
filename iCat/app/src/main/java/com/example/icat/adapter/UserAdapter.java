@@ -19,6 +19,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
     private List<User> list;
     private Context context;
     private Dialog dialog;
+    private String temp;
 
     public interface Dialog {
         void onClick(int position);
@@ -42,9 +43,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewAdapter holder, int position) {
-        holder.jenis_layanan.setText(list.get(position).jenis_layanan);
-        holder.jenis_kucing.setText(list.get(position).jenis_kucing);
-        holder.isAntarJemput.setText(list.get(position).isAntarJemput);
+        temp = "Pesanan ke-";
+        temp = temp + (String.valueOf(list.get(position).pesanan_id));
+        holder.pesanan_id.setText(temp);
+
+        temp = "Jenis layanan \t: ";
+        temp = temp + (list.get(position).jenis_layanan);
+        holder.jenis_layanan.setText(temp);
+
+        temp = "Jenis kucing \t\t: ";
+        temp = temp + (list.get(position).jenis_kucing);
+        holder.jenis_kucing.setText(temp);
+
+        temp = "Layanan lain \t\t: ";
+        temp = temp + (list.get(position).isAntarJemput);
+        holder.isAntarJemput.setText(temp);
     }
 
     @Override
@@ -54,11 +67,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
 
     class ViewAdapter extends RecyclerView.ViewHolder {
 
-        TextView jenis_layanan, jenis_kucing, isAntarJemput;
+        TextView pesanan_id, jenis_layanan, jenis_kucing, isAntarJemput;
 
         public ViewAdapter(@NonNull View itemView) {
             super(itemView);
 
+            pesanan_id = itemView.findViewById(R.id.pesanan_id);
             jenis_layanan = itemView.findViewById(R.id.jenis_layanan);
             jenis_kucing = itemView.findViewById(R.id.jenis_kucing);
             isAntarJemput = itemView.findViewById(R.id.isAntarJemput);

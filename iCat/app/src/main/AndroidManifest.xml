@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICat">
         <activity
+            android:name=".DetailActivity"
+            android:parentActivityName=".BerandaActivity"
+            android:label="Details"/>
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

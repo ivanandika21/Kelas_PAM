@@ -2,6 +2,8 @@ package com.example.icat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,18 +18,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.example.icat.adapter.InfoAdapter;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BerandaActivity extends AppCompatActivity {
 
     private TextView txtHello;
-    private ImageButton carouselBefore, carouselNext;
+    private ImageButton carouselBefore, carouselNext, keHome, keChat;
     private ImageSwitcher carouselImage;
     private FloatingActionButton btn_add;
     private MaterialCardView btn_pesanan;
-
+    private String judul[], deskripsi[];
+    int images[] = {R.drawable.frame1, R.drawable.frame2, R.drawable.frame3};
     private Toolbar main_toolbar;
+    private RecyclerView recyler_info;
 
     int index = 0;
     int indexImg[] = {R.drawable.frame1, R.drawable.frame2, R.drawable.frame3};
@@ -36,6 +41,15 @@ public class BerandaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beranda);
+
+        recyler_info = findViewById(R.id.recyler_info);
+
+        judul = getResources().getStringArray(R.array.judul);
+        deskripsi = getResources().getStringArray(R.array.deskripsi);
+
+        InfoAdapter infoAdapter = new InfoAdapter(this, judul, deskripsi, images);
+        recyler_info.setAdapter(infoAdapter);
+        recyler_info.setLayoutManager(new LinearLayoutManager(this));
 
         // hubungkan layout activity_beranda dengan BerandaActivity.java
         txtHello = findViewById(R.id.txtHello);
@@ -46,11 +60,19 @@ public class BerandaActivity extends AppCompatActivity {
         user = user.substring(0, 1).toUpperCase() + user.substring(1);
         txtHello.append(user);
 
-
         // Codingan carousel
         carouselBefore = findViewById(R.id.carouselBefore);
         carouselNext = findViewById(R.id.carouselNext);
         carouselImage = findViewById(R.id.carouselImage);
+
+        keChat = findViewById(R.id.keChat);
+
+        keChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BerandaActivity.this, ChatActivity.class));
+            }
+        });
 
         carouselBefore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +106,7 @@ public class BerandaActivity extends AppCompatActivity {
                 return imageView;
             }
         });
-        
+
         carouselImage.setImageResource(indexImg[index]);
 
         btn_add = findViewById(R.id.btn_add);
