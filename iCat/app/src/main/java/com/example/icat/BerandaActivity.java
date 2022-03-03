@@ -84,7 +84,7 @@ public class BerandaActivity extends AppCompatActivity {
                 return imageView;
             }
         });
-
+        
         carouselImage.setImageResource(indexImg[index]);
 
         btn_add = findViewById(R.id.btn_add);
@@ -104,7 +104,6 @@ public class BerandaActivity extends AppCompatActivity {
                 startActivity(new Intent(BerandaActivity.this, PesananActivity.class));
             }
         });
-
 
         // Codingan Toolbar
         main_toolbar = findViewById(R.id.main_toolbar);

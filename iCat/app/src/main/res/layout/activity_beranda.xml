@@ -60,9 +60,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txtHello"
-                        android:text="Kec. Sidomukti Salatiga"
                         android:fontFamily="@font/mmedium"
-                        />
+                        android:textColor="@color/blue"
+                        android:text="Kec. Sidomukti Salatiga" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -133,12 +133,12 @@
                     >
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_pesanan"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="5dp"
-                        app:strokeWidth="0dp"
-                        app:strokeColor="@color/blue"
+                        app:cardElevation="0dp"
                         android:layout_marginHorizontal="10dp"
                         >
 
@@ -160,7 +160,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Pesanan Selesai"
+                                android:text="Grooming Kucingmu"
                                 android:textAlignment="center"
                                 android:fontFamily="@font/mmedium"
                                 />
@@ -168,13 +168,11 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/btn_pesanan"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cardCornerRadius="5dp"
-                        app:strokeWidth="0dp"
-                        app:strokeColor="@color/blue"
+                        app:cardElevation="0dp"
                         android:layout_marginHorizontal="10dp"
                         >
 
@@ -196,7 +194,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Pesanan Diproses"
+                                android:text="Vitamin Kucing"
                                 android:textAlignment="center"
                                 android:fontFamily="@font/mmedium"
                                 />
@@ -233,6 +231,7 @@
                         app:cardCornerRadius="5dp"
                         app:strokeWidth="0dp"
                         app:strokeColor="@color/blue"
+                        app:cardElevation="0dp"
                         android:layout_marginVertical="10dp"
                         >
                         <LinearLayout
