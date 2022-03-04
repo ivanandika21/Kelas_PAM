@@ -51,7 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewAdapter> {
         temp = temp + (list.get(position).jenis_layanan);
         holder.jenis_layanan.setText(temp);
 
-        temp = "Jenis kucing \t\t: ";
+        temp = "Jenis kucing \t\t\t: ";
         temp = temp + (list.get(position).jenis_kucing);
         holder.jenis_kucing.setText(temp);
 

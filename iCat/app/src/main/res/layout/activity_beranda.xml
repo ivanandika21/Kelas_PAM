@@ -70,6 +70,7 @@
                 android:layout_below="@+id/section1"
                 android:gravity="center"
                 >
+
                 <ImageSwitcher
                     android:id="@+id/carouselImage"
                     android:layout_width="match_parent"
