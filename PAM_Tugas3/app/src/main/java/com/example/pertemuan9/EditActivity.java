@@ -44,7 +44,7 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private TextView txtOrderId, txtSelectedPlace;
     private EditText editTextName;
-    private Button btnEditOrder, btnOrder, btnPesanan;
+    private Button btnEditOrder, btnOrder;
 
     private String abc;
 
@@ -63,14 +63,6 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getData();
         setData();
-
-        btnPesanan = findViewById(R.id.btn_pesanan);
-        btnPesanan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(EditActivity.this, PesananActivity.class));
-            }
-        });
 
         db = FirebaseFirestore.getInstance();
 
@@ -211,6 +203,7 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
                     });
         }
+        finish();
     }
 
     private void updateOrder() {
