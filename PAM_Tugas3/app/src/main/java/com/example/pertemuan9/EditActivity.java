@@ -42,9 +42,9 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FirebaseFirestore db;
 
-    private TextView txtOrderId, txtSelectedPlace;
+    private TextView txtSelectedPlace;
     private EditText editTextName;
-    private Button btnEditOrder, btnOrder;
+    private Button btnOrder;
 
     private String abc;
 
@@ -55,14 +55,11 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
-        txtOrderId = findViewById(R.id.txt_orderId);
         txtSelectedPlace = findViewById(R.id.txt_selectedPlace);
         editTextName = findViewById(R.id.editTxt_name);
-        btnEditOrder = findViewById(R.id.btn_editOrder);
         btnOrder = findViewById(R.id.btn_order);
 
         getData();
-        setData();
 
         db = FirebaseFirestore.getInstance();
 
@@ -108,10 +105,6 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             Toast.makeText(this, "Tidak ada data",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void setData() {
-        txtOrderId.setText(abc);
     }
 
     @Override
@@ -160,7 +153,7 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         Map<String, Object> place = new HashMap<>();
 
         String name = editTextName.getText().toString();
-        String orderId = txtOrderId.getText().toString();
+        String orderId = abc;
 
         Date now = Calendar.getInstance().getTime();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
@@ -177,28 +170,16 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         order.put("address", txtSelectedPlace.getText().toString());
         order.put("id", orderId);
 
-        if (isNewOrder) {
-            db.collection("orders")
-                    .add(order)
-                    .addOnSuccessListener(documentReference -> {
-                        editTextName.setText("");
-                        txtSelectedPlace.setText("Pilih tempat");
-                        txtOrderId.setText(documentReference.getId());
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal tambah data order", Toast.LENGTH_SHORT).show();
-                    });
-        }
-        else {
-            db.collection("orders").document(orderId)
-                    .set(order)
-                    .addOnSuccessListener(unused -> {
-                        isNewOrder = true;
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
-                    });
-        }
+
+        db.collection("orders").document(orderId)
+                .set(order)
+                .addOnSuccessListener(unused -> {
+                    isNewOrder = true;
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
+                });
+
         Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
         this.finish();

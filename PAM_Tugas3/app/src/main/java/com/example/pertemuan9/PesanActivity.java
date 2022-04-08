@@ -41,9 +41,11 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
     private FirebaseFirestore db;
 
-    private TextView txtOrderId, txtSelectedPlace;
+    private TextView txtSelectedPlace;
     private EditText editTextName;
-    private Button btnEditOrder, btnOrder, btnPesanan;
+    private Button btnOrder;
+
+    private String txtOrderId;
 
     private boolean isNewOrder = true;
 
@@ -52,10 +54,8 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesan);
 
-        txtOrderId = findViewById(R.id.txt_orderId);
         txtSelectedPlace = findViewById(R.id.txt_selectedPlace);
         editTextName = findViewById(R.id.editTxt_name);
-        btnEditOrder = findViewById(R.id.btn_editOrder);
         btnOrder = findViewById(R.id.btn_order);
 
         db = FirebaseFirestore.getInstance();
@@ -63,14 +63,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        btnPesanan = findViewById(R.id.btn_pesanan);
-        btnPesanan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PesanActivity.this, MainActivity.class));
-            }
-        });
 
         btnOrder.setOnClickListener(view -> { saveOrder(); });
     }
@@ -122,7 +114,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         Map<String, Object> place = new HashMap<>();
 
         String name = editTextName.getText().toString();
-        String orderId = txtOrderId.getText().toString();
+        String orderId = txtOrderId;
 
         Date now = Calendar.getInstance().getTime();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
@@ -157,15 +149,14 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
             db.collection("orders").document(orderId)
                     .set(order)
                     .addOnSuccessListener(unused -> {
-                        editTextName.setText("");
-                        txtSelectedPlace.setText("");
-                        txtOrderId.setText(orderId);
-
                         isNewOrder = true;
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
                     });
         }
+        Intent refresh = new Intent(this, MainActivity.class);
+        startActivity(refresh);
+        this.finish();
     }
 }

@@ -16,6 +16,7 @@ import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -63,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void EventChangeListener() {
 
-        db.collection("orders").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("orders").orderBy("date", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
