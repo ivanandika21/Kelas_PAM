@@ -39,8 +39,8 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FirebaseFirestore db;
 
-    private TextView txtSelectedPlace;
-    private EditText editTextName, txtOrderId;
+    private TextView txtOrderId, txtSelectedPlace;
+    private EditText editTextName;
     private Button btnEditOrder, btnOrder, btnPesanan;
 
     private String abc;
@@ -75,8 +75,36 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        isNewOrder = false;
+
+        String orderId = abc;
+        DocumentReference order = db.collection("orders").document(orderId);
+        order.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String name = document.get("name").toString();
+                    Map<String, Object> place = (HashMap<String, Object>) document.get("addressdata");
+
+                    editTextName.setText(name);
+                    txtSelectedPlace.setText(place.get("address").toString());
+
+                    LatLng resultPlace = new LatLng((double) place.get("lat"), (double) place.get("lng"));
+                    selectedPlace = resultPlace;
+                    selectedMarker.setPosition(selectedPlace);
+                    gMap.animateCamera(CameraUpdateFactory.newLatLng(selectedPlace));
+                }
+                else {
+                    isNewOrder = true;
+                    Toast.makeText(this, "Document does not exist!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else {
+                Toast.makeText(this, "Unable to read the db!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btnOrder.setOnClickListener(view -> { saveOrder(); });
-        btnEditOrder.setOnClickListener(view -> { updateOrder(); });
     }
 
     private void getData() {
@@ -137,16 +165,17 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         Map<String, Object> place = new HashMap<>();
 
         String name = editTextName.getText().toString();
+        String orderId = txtOrderId.getText().toString();
 
         place.put("address", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
         place.put("lng", selectedPlace.longitude);
 
         order.put("name", name);
-        order.put("createdDate", new Date());
-        order.put("place", place);
-
-        String orderId = txtOrderId.getText().toString();
+        order.put("createdDate", new Date().toString());
+        order.put("addressdata", place);
+        order.put("address", txtSelectedPlace.getText().toString());
+        order.put("id", orderId);
 
         if (isNewOrder) {
             db.collection("orders")
@@ -177,33 +206,6 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void updateOrder() {
-        isNewOrder = false;
 
-        String orderId = txtOrderId.getText().toString();
-        DocumentReference order = db.collection("orders").document(orderId);
-        order.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    String name = document.get("name").toString();
-                    Map<String, Object> place = (HashMap<String, Object>) document.get("place");
-
-                    editTextName.setText(name);
-                    txtSelectedPlace.setText(place.get("address").toString());
-
-                    LatLng resultPlace = new LatLng((double) place.get("lat"), (double) place.get("lng"));
-                    selectedPlace = resultPlace;
-                    selectedMarker.setPosition(selectedPlace);
-                    gMap.animateCamera(CameraUpdateFactory.newLatLng(selectedPlace));
-                }
-                else {
-                    isNewOrder = true;
-                    Toast.makeText(this, "Document does not exist!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-                Toast.makeText(this, "Unable to read the DataBase", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
