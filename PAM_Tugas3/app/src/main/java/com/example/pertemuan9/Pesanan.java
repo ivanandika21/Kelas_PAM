@@ -2,13 +2,13 @@ package com.example.pertemuan9;
 
 public class Pesanan {
 
-    String name, createdDate, address, id;
+    String name, date, address, id;
 
     public Pesanan(){}
 
-    public Pesanan(String name, String createdDate, String address, String id) {
+    public Pesanan(String name, String date, String address, String id) {
         this.name = name;
-        this.createdDate = createdDate;
+        this.date = date;
         this.address = address;
         this.id = id;
     }
@@ -21,12 +21,12 @@ public class Pesanan {
         this.name = name;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getAddress() {

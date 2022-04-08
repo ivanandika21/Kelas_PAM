@@ -37,7 +37,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
 
         Pesanan pesanan = pesananArrayList.get(position);
 
-        holder.var_tanggal.setText(pesanan.getCreatedDate());
+        holder.var_tanggal.setText(pesanan.getDate());
         holder.var_nama.setText(pesanan.getName());
         holder.var_alamat.setText(pesanan.getAddress());
         holder.var_id.setText(pesanan.getId());

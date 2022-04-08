@@ -24,6 +24,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -122,12 +125,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String name = editTextName.getText().toString();
         String orderId = txtOrderId.getText().toString();
 
+        Date now = Calendar.getInstance().getTime();
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
+        String currentTime = df.format(now);
+
+
         place.put("address", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
         place.put("lng", selectedPlace.longitude);
 
         order.put("name", name);
-        order.put("createdDate", new Date().toString());
+        order.put("date", currentTime);
         order.put("addressdata", place);
         order.put("address", txtSelectedPlace.getText().toString());
         order.put("id", orderId);
