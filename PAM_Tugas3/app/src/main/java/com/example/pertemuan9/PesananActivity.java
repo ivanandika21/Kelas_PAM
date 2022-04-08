@@ -33,10 +33,10 @@ public class PesananActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesanan);
 
-//        progressDialog = new ProgressDialog(this);
-//        progressDialog.setCancelable(false);
-//        progressDialog.setMessage("Mempersiapkan data...");
-//        progressDialog.show();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Mempersiapkan data...");
+        progressDialog.show();
 
         recyclerView = findViewById(R.id.id_recycler);
         recyclerView.setHasFixedSize(true);
@@ -59,9 +59,9 @@ public class PesananActivity extends AppCompatActivity {
 
                         if (error != null){
 
-//                            if (progressDialog.isShowing()){
-//                                progressDialog.dismiss();
-//                            }
+                            if (progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
                             Log.e("Firebase error", error.getMessage());
                             return;
                         }
@@ -73,9 +73,9 @@ public class PesananActivity extends AppCompatActivity {
 
                             pesananAdapter.notifyDataSetChanged();
 
-//                            if (progressDialog.isShowing()){
-//                                progressDialog.dismiss();
-//                            }
+                            if (progressDialog.isShowing()){
+                                progressDialog.dismiss();
+                            }
                         }
                     }
                 });

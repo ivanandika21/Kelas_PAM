@@ -1,9 +1,11 @@
 package com.example.pertemuan9;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +40,14 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
         holder.var_tanggal.setText(pesanan.getTanggal());
         holder.var_nama.setText(pesanan.getNama());
         holder.var_alamat.setText(pesanan.getAlamat());
+        holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditActivity.class);
+                intent.putExtra("abc", pesanan.getNama());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -48,6 +58,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
     public static class MyViewHolder extends  RecyclerView.ViewHolder {
 
         TextView var_tanggal, var_nama, var_alamat;
+        LinearLayout var_mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +66,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
             var_tanggal = itemView.findViewById(R.id.id_tanggal);
             var_nama = itemView.findViewById(R.id.id_nama);
             var_alamat = itemView.findViewById(R.id.id_alamat);
+            var_mainLayout = itemView.findViewById(R.id.id_mainLayout);
         }
     }
 }
