@@ -40,11 +40,12 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
         holder.var_tanggal.setText(pesanan.getTanggal());
         holder.var_nama.setText(pesanan.getNama());
         holder.var_alamat.setText(pesanan.getAlamat());
+        holder.var_id.setText(pesanan.getId());
         holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditActivity.class);
-                intent.putExtra("abc", pesanan.getNama());
+                intent.putExtra("abc", pesanan.getId());
                 context.startActivity(intent);
             }
         });
@@ -57,7 +58,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
 
     public static class MyViewHolder extends  RecyclerView.ViewHolder {
 
-        TextView var_tanggal, var_nama, var_alamat;
+        TextView var_tanggal, var_nama, var_alamat, var_id;
         LinearLayout var_mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -66,6 +67,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
             var_tanggal = itemView.findViewById(R.id.id_tanggal);
             var_nama = itemView.findViewById(R.id.id_nama);
             var_alamat = itemView.findViewById(R.id.id_alamat);
+            var_id = itemView.findViewById(R.id.id_idorder);
             var_mainLayout = itemView.findViewById(R.id.id_mainLayout);
         }
     }

@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Map<String, Object> place = new HashMap<>();
 
         String name = editTextName.getText().toString();
+        String orderId = txtOrderId.getText().toString();
 
         place.put("alamat", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
@@ -128,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         order.put("nama", name);
         order.put("tanggal", new Date().toString());
         order.put("alamat", place.toString());
+        order.put("id", orderId);
 
-        String orderId = txtOrderId.getText().toString();
 
         if (isNewOrder) {
             db.collection("orders")
