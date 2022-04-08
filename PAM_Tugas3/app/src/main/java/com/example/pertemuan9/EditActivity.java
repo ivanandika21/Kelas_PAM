@@ -39,8 +39,8 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FirebaseFirestore db;
 
-    private TextView txtOrderId, txtSelectedPlace;
-    private EditText editTextName;
+    private TextView txtSelectedPlace;
+    private EditText editTextName, txtOrderId;
     private Button btnEditOrder, btnOrder, btnPesanan;
 
     private String abc;
@@ -137,17 +137,16 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         Map<String, Object> place = new HashMap<>();
 
         String name = editTextName.getText().toString();
-        String orderId = txtOrderId.getText().toString();
 
-        place.put("alamat", txtSelectedPlace.getText().toString());
+        place.put("address", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
         place.put("lng", selectedPlace.longitude);
 
-        order.put("nama", name);
-        order.put("tanggal", new Date().toString());
-        order.put("alamat", place.toString());
-        order.put("id", orderId);
+        order.put("name", name);
+        order.put("createdDate", new Date());
+        order.put("place", place);
 
+        String orderId = txtOrderId.getText().toString();
 
         if (isNewOrder) {
             db.collection("orders")

@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
-    //Variabel
     private GoogleMap gMap;
     private Marker selectedMarker;
     private LatLng selectedPlace;
@@ -56,6 +55,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         btnEditOrder = findViewById(R.id.btn_editOrder);
         btnOrder = findViewById(R.id.btn_order);
 
+        db = FirebaseFirestore.getInstance();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
         btnPesanan = findViewById(R.id.btn_pesanan);
         btnPesanan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +68,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(new Intent(MainActivity.this, PesananActivity.class));
             }
         });
-
-        db = FirebaseFirestore.getInstance();
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         btnOrder.setOnClickListener(view -> { saveOrder(); });
         btnEditOrder.setOnClickListener(view -> { updateOrder(); });
@@ -78,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
 
-        LatLng Salatiga = new LatLng(-7.3305, 110.5084);
+        LatLng salatiga = new LatLng(-7.3305, 110.5084);
 
-        selectedPlace = Salatiga;
+        selectedPlace = salatiga;
         selectedMarker = gMap.addMarker(new MarkerOptions().position(selectedPlace));
 
         gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
@@ -101,9 +100,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Address place = addresses.get(0);
                 StringBuilder street = new StringBuilder();
 
-                for (int i = 0; i <= place.getMaxAddressLineIndex(); i++) {
+                for (int i=0; i <= place.getMaxAddressLineIndex(); i++) {
                     street.append(place.getAddressLine(i)).append("\n");
                 }
+
                 txtSelectedPlace.setText(street.toString());
             }
             else {
@@ -122,13 +122,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         String name = editTextName.getText().toString();
         String orderId = txtOrderId.getText().toString();
 
-        place.put("alamat", txtSelectedPlace.getText().toString());
+        place.put("address", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
         place.put("lng", selectedPlace.longitude);
 
-        order.put("nama", name);
-        order.put("tanggal", new Date().toString());
-        order.put("alamat", place.toString());
+        order.put("name", name);
+        order.put("createdDate", new Date().toString());
+        order.put("addressdata", place);
+        order.put("address", txtSelectedPlace.getText().toString());
         order.put("id", orderId);
 
 
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     String name = document.get("name").toString();
-                    Map<String, Object> place = (HashMap<String, Object>) document.get("place");
+                    Map<String, Object> place = (HashMap<String, Object>) document.get("addressdata");
 
                     editTextName.setText(name);
                     txtSelectedPlace.setText(place.get("address").toString());
@@ -186,9 +187,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
             else {
-                Toast.makeText(this, "Unable to read the DataBase", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Unable to read the db!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

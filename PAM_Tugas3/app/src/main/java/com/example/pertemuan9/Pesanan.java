@@ -2,39 +2,39 @@ package com.example.pertemuan9;
 
 public class Pesanan {
 
-    String nama, alamat, tanggal, id;
+    String name, createdDate, address, id;
 
     public Pesanan(){}
 
-    public Pesanan(String nama, String alamat, String tanggal, String id) {
-        this.nama = nama;
-        this.alamat = alamat;
-        this.tanggal = tanggal;
+    public Pesanan(String name, String createdDate, String address, String id) {
+        this.name = name;
+        this.createdDate = createdDate;
+        this.address = address;
         this.id = id;
     }
 
-    public String getNama() {
-        return nama;
+    public String getName() {
+        return name;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAlamat() {
-        return alamat;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getTanggal() {
-        return tanggal;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getId() {

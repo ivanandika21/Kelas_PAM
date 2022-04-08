@@ -30,7 +30,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
-    //Variabel
     private GoogleMap gMap;
     private Marker selectedMarker;
     private LatLng selectedPlace;
@@ -68,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
 
-        LatLng Salatiga = new LatLng(-7.3305, 110.5084);
+        LatLng salatiga = new LatLng(-7.3305, 110.5084);
 
-        selectedPlace = Salatiga;
+        selectedPlace = salatiga;
         selectedMarker = gMap.addMarker(new MarkerOptions().position(selectedPlace));
 
         gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
@@ -91,9 +90,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Address place = addresses.get(0);
                 StringBuilder street = new StringBuilder();
 
-                for (int i = 0; i <= place.getMaxAddressLineIndex(); i++) {
+                for (int i=0; i <= place.getMaxAddressLineIndex(); i++) {
                     street.append(place.getAddressLine(i)).append("\n");
                 }
+
                 txtSelectedPlace.setText(street.toString());
             }
             else {
@@ -175,9 +175,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
             else {
-                Toast.makeText(this, "Unable to read the DataBase", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Unable to read the db!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }
