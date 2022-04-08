@@ -9,13 +9,19 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e00018ba-c9d4-4180-a09f-cab23d77fa51" name="Default Changelist" comment="" />
+    <list default="true" id="e00018ba-c9d4-4180-a09f-cab23d77fa51" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[6023483c0804]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\ivana\.android\avd\Pixel_3a_API_25.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -33,6 +39,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -51,6 +60,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
       <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
       <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -115,5 +125,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

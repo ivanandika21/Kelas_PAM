@@ -3,9 +3,11 @@ package com.example.pertemuan9;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private TextView txtOrderId, txtSelectedPlace;
     private EditText editTextName;
-    private Button btnEditOrder, btnOrder;
+    private Button btnEditOrder, btnOrder, btnPesanan;
 
     private boolean isNewOrder = true;
 
@@ -53,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         editTextName = findViewById(R.id.editTxt_name);
         btnEditOrder = findViewById(R.id.btn_editOrder);
         btnOrder = findViewById(R.id.btn_order);
+
+        btnPesanan = findViewById(R.id.btn_pesanan);
+        btnPesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, PesananActivity.class));
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
 
@@ -111,13 +121,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         String name = editTextName.getText().toString();
 
-        place.put("address", txtSelectedPlace.getText().toString());
+        place.put("alamat", txtSelectedPlace.getText().toString());
         place.put("lat", selectedPlace.latitude);
         place.put("lng", selectedPlace.longitude);
 
-        order.put("name", name);
-        order.put("createdDate", new Date());
-        order.put("place", place);
+        order.put("nama", name);
+        order.put("tanggal", new Date().toString());
+        order.put("alamat", place.toString());
 
         String orderId = txtOrderId.getText().toString();
 
