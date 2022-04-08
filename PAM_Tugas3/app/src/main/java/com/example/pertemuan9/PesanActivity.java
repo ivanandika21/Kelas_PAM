@@ -73,7 +73,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         });
 
         btnOrder.setOnClickListener(view -> { saveOrder(); });
-        btnEditOrder.setOnClickListener(view -> { updateOrder(); });
     }
 
     @Override
@@ -138,16 +137,17 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         order.put("date", currentTime);
         order.put("addressdata", place);
         order.put("address", txtSelectedPlace.getText().toString());
-        order.put("id", orderId);
+        DocumentReference ref = db.collection("orders").document();
+        String myId = ref.getId();
+        order.put("id", myId);
 
 
         if (isNewOrder) {
-            db.collection("orders")
-                    .add(order)
+            db.collection("orders").document(myId)
+                    .set(order)
                     .addOnSuccessListener(documentReference -> {
                         editTextName.setText("");
                         txtSelectedPlace.setText("Pilih tempat");
-                        txtOrderId.setText(documentReference.getId());
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Gagal tambah data order", Toast.LENGTH_SHORT).show();
@@ -167,36 +167,5 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                         Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
                     });
         }
-    }
-
-    private void updateOrder() {
-        isNewOrder = false;
-
-        String orderId = txtOrderId.getText().toString();
-        DocumentReference order = db.collection("orders").document(orderId);
-        order.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    String name = document.get("name").toString();
-                    Map<String, Object> place = (HashMap<String, Object>) document.get("addressdata");
-
-                    editTextName.setText(name);
-                    txtSelectedPlace.setText(place.get("address").toString());
-
-                    LatLng resultPlace = new LatLng((double) place.get("lat"), (double) place.get("lng"));
-                    selectedPlace = resultPlace;
-                    selectedMarker.setPosition(selectedPlace);
-                    gMap.animateCamera(CameraUpdateFactory.newLatLng(selectedPlace));
-                }
-                else {
-                    isNewOrder = true;
-                    Toast.makeText(this, "Document does not exist!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else {
-                Toast.makeText(this, "Unable to read the db!", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

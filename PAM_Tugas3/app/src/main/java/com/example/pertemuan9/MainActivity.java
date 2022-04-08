@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Mempersiapkan data...");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setMessage("Mempersiapkan data...");
+//        progressDialog.show();
 
         recyclerView = findViewById(R.id.id_recycler);
         recyclerView.setHasFixedSize(true);
@@ -68,10 +68,9 @@ public class MainActivity extends AppCompatActivity {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
 
                 if (error != null){
-
-                    if (progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
+//                    if (progressDialog.isShowing()){
+//                        progressDialog.dismiss();
+//                    }
                     Log.e("Firebase error", error.getMessage());
                     return;
                 }
@@ -83,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
 
                     pesananAdapter.notifyDataSetChanged();
 
-                    if (progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                    }
+//                    if (progressDialog.isShowing()){
+//                        progressDialog.dismiss();
+//                    }
                 }
             }
         });

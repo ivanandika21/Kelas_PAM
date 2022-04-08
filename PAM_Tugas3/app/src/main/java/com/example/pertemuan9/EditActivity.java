@@ -193,20 +193,14 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
             db.collection("orders").document(orderId)
                     .set(order)
                     .addOnSuccessListener(unused -> {
-                        editTextName.setText("");
-                        txtSelectedPlace.setText("");
-                        txtOrderId.setText(orderId);
-
                         isNewOrder = true;
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
                     });
         }
-        finish();
-    }
-
-    private void updateOrder() {
-
+        Intent refresh = new Intent(this, MainActivity.class);
+        startActivity(refresh);
+        this.finish();
     }
 }
