@@ -19,20 +19,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/ic_dot"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/ic_person"/>
 
                 <TextView
                     android:layout_weight="9"
@@ -42,7 +45,7 @@
                     android:textColor="@color/blue_500"
                     android:text="TextView"
                     android:textSize="18sp"
-                    android:layout_marginStart="10dp"/>
+                    android:layout_marginStart="8dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -52,9 +55,10 @@
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="80dp"
+                    android:layout_width="85dp"
                     android:layout_height="wrap_content"
                     android:text="Tanggal"
+                    android:layout_marginBottom="10dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -71,7 +75,7 @@
 
                 <TextView
                     android:id="@+id/textView3"
-                    android:layout_width="80dp"
+                    android:layout_width="85dp"
                     android:layout_height="wrap_content"
                     android:text="Dari"
                     android:textStyle="bold" />
@@ -90,9 +94,9 @@
 
                 <TextView
                     android:id="@+id/textView4"
-                    android:layout_width="80dp"
+                    android:layout_width="85dp"
                     android:layout_height="wrap_content"
-                    android:text="Ke"
+                    android:text="Ke alamat"
                     android:textStyle="bold" />
 
                 <TextView
