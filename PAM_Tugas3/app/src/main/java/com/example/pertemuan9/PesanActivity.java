@@ -17,7 +17,6 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,6 +38,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,6 +63,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
     String txtOrderId;
     private double saveLat;
     private double saveLong;
+    private String tmp_street_tujuan, tmp_street_awal;
 
     SupportMapFragment supportMapFragment;
     LocationRequest locationRequest;
@@ -108,7 +109,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
             List<Location> locationList = locationResult.getLocations();
             if (locationList.size() > 0) {
                 Location location = locationList.get(locationList.size() - 1);
-                Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
                 lastLocation = location;
                 if (currLocationMarker != null) {
                     currLocationMarker.remove();
@@ -119,7 +119,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(awal);
-                markerOptions.title("Current Position");
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                 currLocationMarker = gMap.addMarker(markerOptions);
 
@@ -149,11 +148,9 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
-                //Location Permission already granted
                 client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
                 gMap.setMyLocationEnabled(true);
             } else {
-                //Request Location Permission
                 checkLocationPermission();
             }
         }
@@ -174,8 +171,8 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 new AlertDialog.Builder(this)
-                        .setTitle("Location Permission Needed")
-                        .setMessage("This app needs the Location permission, please accept to use location functionality")
+                        .setTitle("Membutuhkan Akses Lokasi")
+                        .setMessage("Aplikasi ini membutuhkan akses lokasi untuk menentukan lokasi Anda")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -190,7 +187,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
 
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION );
@@ -200,8 +196,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
     @SuppressLint({"MissingSuperCall", "MissingPermission"})
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0
@@ -212,7 +207,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                         gMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permintaak akses lokasi ditolak", Toast.LENGTH_LONG).show();
                 }
                 return;
             }
@@ -229,27 +224,29 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         try {
             List<Address> addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
             if (addresses != null) {
-                Address place = addresses.get(0);
-                StringBuilder street = new StringBuilder();
+                Address data_tujuan = addresses.get(0);
+                StringBuilder street_tujuan = new StringBuilder();
 
-                for (int i=0; i <= place.getMaxAddressLineIndex(); i++) {
-                    street.append(place.getAddressLine(i)).append("\n");
+                for (int i=0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
+                    street_tujuan.append(data_tujuan.getAddressLine(i)).append("\n");
                 }
 
-                txtSelectedPlace.setText(street.toString());
+                txtSelectedPlace.setText(street_tujuan.toString());
+                tmp_street_tujuan = street_tujuan.toString();
             }
             else {
-                Toast.makeText(this, "Could not find Address!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Tidak dapat menemukan alamat!", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e) {
-            Toast.makeText(this, "Error get Address!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tidak dapat menemukan alamat!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveOrder() {
         Map<String, Object> order = new HashMap<>();
-        Map<String, Object> place = new HashMap<>();
+        Map<String, Object> data_tujuan = new HashMap<>();
+        Map<String, Object> data_awal = new HashMap<>();
 
         String name = editTextName.getText().toString();
         String orderId = txtOrderId;
@@ -259,38 +256,44 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         String currentTime = df.format(now);
 
 
-        place.put("address", txtSelectedPlace.getText().toString());
-        place.put("lat", selectedPlace.latitude);
-        place.put("lng", selectedPlace.longitude);
+        data_tujuan.put("address", txtSelectedPlace.getText().toString());
+        data_tujuan.put("lat", selectedPlace.latitude);
+        data_tujuan.put("lng", selectedPlace.longitude);
 
-        order.put("name", name);
-        order.put("date", currentTime);
-        order.put("addressdata", place);
-        order.put("address", txtSelectedPlace.getText().toString());
+        data_awal.put("lat", saveLat);
+        data_awal.put("lng", saveLong);
+
         DocumentReference ref = db.collection("orders").document();
         String myId = ref.getId();
+        
         order.put("id", myId);
+        order.put("name", name);
+        order.put("date", currentTime);
+        
+        order.put("dataawal", data_awal);
+
+        order.put("datatujuan", data_tujuan);
+        order.put("tujuan", tmp_street_tujuan);
+        
 
 
         if (isNewOrder) {
-            db.collection("orders").document(myId)
+            db.collection("orders")
+                    .document(myId)
                     .set(order)
-                    .addOnSuccessListener(documentReference -> {
-                        editTextName.setText("");
-                        txtSelectedPlace.setText("Pilih tempat");
-                    })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal tambah data order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Gagal tambah data pesanan", Toast.LENGTH_SHORT).show();
                     });
         }
         else {
-            db.collection("orders").document(orderId)
+            db.collection("orders")
+                    .document(orderId)
                     .set(order)
                     .addOnSuccessListener(unused -> {
                         isNewOrder = true;
                     })
                     .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal ubah data order", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Gagal ubah data pesanan", Toast.LENGTH_SHORT).show();
                     });
         }
         Intent refresh = new Intent(this, MainActivity.class);

@@ -2,14 +2,14 @@ package com.example.pertemuan9;
 
 public class Pesanan {
 
-    String name, date, address, id;
+    String name, date, tujuan, id;
 
     public Pesanan(){}
 
-    public Pesanan(String name, String date, String address, String id) {
+    public Pesanan(String name, String date, String tujuan, String id) {
         this.name = name;
         this.date = date;
-        this.address = address;
+        this.tujuan = tujuan;
         this.id = id;
     }
 
@@ -29,12 +29,12 @@ public class Pesanan {
         this.date = date;
     }
 
-    public String getAddress() {
-        return address;
+    public String getTujuan() {
+        return tujuan;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setTujuan(String tujuan) {
+        this.tujuan = tujuan;
     }
 
     public String getId() {

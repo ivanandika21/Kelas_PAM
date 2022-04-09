@@ -94,11 +94,11 @@
                     android:id="@+id/textView4"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Alamat"
+                    android:text="Tujuan"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/id_alamat"
+                    android:id="@+id/id_tujuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView"/>

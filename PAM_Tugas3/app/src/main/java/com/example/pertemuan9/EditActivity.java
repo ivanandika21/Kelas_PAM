@@ -46,7 +46,9 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
     private EditText editTextName;
     private Button btnOrder;
 
-    private String abc;
+    private String abc, tmp_street_tujuan;
+    private double saveLat;
+    private double saveLong;
 
     private boolean isNewOrder = true;
 
@@ -76,12 +78,17 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     String name = document.get("name").toString();
-                    Map<String, Object> place = (HashMap<String, Object>) document.get("addressdata");
+
+                    Map<String, Object> data_awal = (HashMap<String, Object>) document.get("dataawal");
+                    saveLat = (double) data_awal.get("lat");
+                    saveLong = (double) data_awal.get("lng");
+
+                    Map<String, Object> data_tujuan = (HashMap<String, Object>) document.get("datatujuan");
 
                     editTextName.setText(name);
-                    txtSelectedPlace.setText(place.get("address").toString());
+                    txtSelectedPlace.setText(data_tujuan.get("address").toString());
 
-                    LatLng resultPlace = new LatLng((double) place.get("lat"), (double) place.get("lng"));
+                    LatLng resultPlace = new LatLng((double) data_tujuan.get("lat"), (double) data_tujuan.get("lng"));
                     selectedPlace = resultPlace;
                     selectedMarker.setPosition(selectedPlace);
                     gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
@@ -131,13 +138,15 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             List<Address> addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
             if (addresses != null) {
-                Address place = addresses.get(0);
-                StringBuilder street = new StringBuilder();
+                Address data_tujuan = addresses.get(0);
+                StringBuilder street_tujuan = new StringBuilder();
 
-                for (int i = 0; i <= place.getMaxAddressLineIndex(); i++) {
-                    street.append(place.getAddressLine(i)).append("\n");
+                for (int i=0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
+                    street_tujuan.append(data_tujuan.getAddressLine(i)).append("\n");
                 }
-                txtSelectedPlace.setText(street.toString());
+
+                txtSelectedPlace.setText(street_tujuan.toString());
+                tmp_street_tujuan = street_tujuan.toString();
             }
             else {
                 Toast.makeText(this, "Could not find Address!", Toast.LENGTH_SHORT).show();
@@ -150,7 +159,8 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void saveOrder() {
         Map<String, Object> order = new HashMap<>();
-        Map<String, Object> place = new HashMap<>();
+        Map<String, Object> data_tujuan = new HashMap<>();
+        Map<String, Object> data_awal = new HashMap<>();
 
         String name = editTextName.getText().toString();
         String orderId = abc;
@@ -160,18 +170,26 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         String currentTime = df.format(now);
 
 
-        place.put("address", txtSelectedPlace.getText().toString());
-        place.put("lat", selectedPlace.latitude);
-        place.put("lng", selectedPlace.longitude);
+        data_tujuan.put("address", txtSelectedPlace.getText().toString());
+        data_tujuan.put("lat", selectedPlace.latitude);
+        data_tujuan.put("lng", selectedPlace.longitude);
 
+
+        data_awal.put("lat", saveLat);
+        data_awal.put("lng", saveLong);
+
+        order.put("id", orderId);
         order.put("name", name);
         order.put("date", currentTime);
-        order.put("addressdata", place);
-        order.put("address", txtSelectedPlace.getText().toString());
-        order.put("id", orderId);
+
+        order.put("dataawal", data_awal);
+
+        order.put("datatujuan", data_tujuan);
+        order.put("tujuan", tmp_street_tujuan);
 
 
-        db.collection("orders").document(orderId)
+        db.collection("orders")
+                .document(orderId)
                 .set(order)
                 .addOnSuccessListener(unused -> {
                     isNewOrder = true;
