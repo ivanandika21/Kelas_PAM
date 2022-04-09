@@ -51,4 +51,7 @@ dependencies {
 
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:8.0.1'
+
+    // Fused support
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }
