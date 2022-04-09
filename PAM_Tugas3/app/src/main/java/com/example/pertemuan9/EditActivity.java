@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -35,21 +36,16 @@ import java.util.Map;
 
 public class EditActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
-    //Variabel
     private GoogleMap gMap;
     private Marker selectedMarker;
     private LatLng selectedPlace;
-
     private FirebaseFirestore db;
-
     private TextView txtSelectedPlace;
     private EditText editTextName;
     private Button btnOrder;
-
-    private String abc, tmp_street_tujuan;
+    private String abc, tmp_street_tujuan, tmp_street_awal;
     private double saveLat;
     private double saveLong;
-
     private boolean isNewOrder = true;
 
     @Override
@@ -79,38 +75,48 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (document.exists()) {
                     String name = document.get("name").toString();
 
-                    Map<String, Object> data_awal = (HashMap<String, Object>) document.get("dataawal");
+                    Map < String, Object > data_awal = (HashMap < String, Object > ) document.get("dataawal");
                     saveLat = (double) data_awal.get("lat");
                     saveLong = (double) data_awal.get("lng");
+                    tmp_street_awal = data_awal.get("address").toString();
 
-                    Map<String, Object> data_tujuan = (HashMap<String, Object>) document.get("datatujuan");
+                    LatLng awal = new LatLng((double) data_awal.get("lat"), (double) data_awal.get("lng"));
+
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions.position(awal);
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    gMap.addMarker(markerOptions);
+
+                    Map < String, Object > data_tujuan = (HashMap < String, Object > ) document.get("datatujuan");
 
                     editTextName.setText(name);
                     txtSelectedPlace.setText(data_tujuan.get("address").toString());
+
+                    tmp_street_tujuan = data_tujuan.get("address").toString();
 
                     LatLng resultPlace = new LatLng((double) data_tujuan.get("lat"), (double) data_tujuan.get("lng"));
                     selectedPlace = resultPlace;
                     selectedMarker.setPosition(selectedPlace);
                     gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
-                }
-                else {
+                } else {
                     isNewOrder = true;
                     Toast.makeText(this, "Document does not exist!", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Unable to read the db!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnOrder.setOnClickListener(view -> { saveOrder(); });
+        btnOrder.setOnClickListener(view -> {
+            saveOrder();
+        });
     }
 
     private void getData() {
         if (getIntent().hasExtra("abc")) {
             abc = getIntent().getStringExtra("abc");
         } else {
-            Toast.makeText(this, "Tidak ada data",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tidak ada data", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -136,31 +142,29 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         try {
-            List<Address> addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
+            List < Address > addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
             if (addresses != null) {
                 Address data_tujuan = addresses.get(0);
                 StringBuilder street_tujuan = new StringBuilder();
 
-                for (int i=0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
                     street_tujuan.append(data_tujuan.getAddressLine(i)).append("\n");
                 }
 
                 txtSelectedPlace.setText(street_tujuan.toString());
                 tmp_street_tujuan = street_tujuan.toString();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Could not find Address!", Toast.LENGTH_SHORT).show();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(this, "Error get Address!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveOrder() {
-        Map<String, Object> order = new HashMap<>();
-        Map<String, Object> data_tujuan = new HashMap<>();
-        Map<String, Object> data_awal = new HashMap<>();
+        Map < String, Object > order = new HashMap <> ();
+        Map < String, Object > data_tujuan = new HashMap <> ();
+        Map < String, Object > data_awal = new HashMap <> ();
 
         String name = editTextName.getText().toString();
         String orderId = abc;
@@ -169,12 +173,11 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
         String currentTime = df.format(now);
 
-
         data_tujuan.put("address", txtSelectedPlace.getText().toString());
         data_tujuan.put("lat", selectedPlace.latitude);
         data_tujuan.put("lng", selectedPlace.longitude);
 
-
+        data_awal.put("address", tmp_street_awal);
         data_awal.put("lat", saveLat);
         data_awal.put("lng", saveLong);
 
@@ -183,10 +186,10 @@ public class EditActivity extends AppCompatActivity implements OnMapReadyCallbac
         order.put("date", currentTime);
 
         order.put("dataawal", data_awal);
+        order.put("awal", tmp_street_awal);
 
         order.put("datatujuan", data_tujuan);
         order.put("tujuan", tmp_street_tujuan);
-
 
         db.collection("orders")
                 .document(orderId)

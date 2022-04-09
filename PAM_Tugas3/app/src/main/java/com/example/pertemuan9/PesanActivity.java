@@ -48,31 +48,26 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class PesanActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener{
+public class PesanActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap gMap;
     private Marker selectedMarker;
-    private LatLng selectedPlace;
-
+    private LatLng selectedPlace, selectedAwal;
     private FirebaseFirestore db;
-
     private TextView txtSelectedPlace;
     private EditText editTextName;
     private Button btnOrder;
-
-    String txtOrderId;
+    private String tmp_street_tujuan, tmp_street_awal;
     private double saveLat;
     private double saveLong;
-    private String tmp_street_tujuan, tmp_street_awal;
+    private boolean isNewOrder = true;
 
+    String txtOrderId;
     SupportMapFragment supportMapFragment;
     LocationRequest locationRequest;
     Location lastLocation;
     Marker currLocationMarker;
     FusedLocationProviderClient client;
-
-
-    private boolean isNewOrder = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +85,6 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                 .findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
 
-
         btnOrder.setOnClickListener(view -> { saveOrder(); });
     }
 
@@ -106,7 +100,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
-            List<Location> locationList = locationResult.getLocations();
+            List < Location > locationList = locationResult.getLocations();
             if (locationList.size() > 0) {
                 Location location = locationList.get(locationList.size() - 1);
                 lastLocation = location;
@@ -116,6 +110,8 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
                 // marker ke lokasi awal
                 LatLng awal = new LatLng(location.getLatitude(), location.getLongitude());
+
+                selectedAwal = awal;
 
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(awal);
@@ -146,15 +142,13 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
                 gMap.setMyLocationEnabled(true);
             } else {
                 checkLocationPermission();
             }
-        }
-        else {
+        } else {
             client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
             gMap.setMyLocationEnabled(true);
         }
@@ -164,8 +158,8 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -178,29 +172,35 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(PesanActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION );
+                                        new String[] {
+                                                Manifest.permission.ACCESS_FINE_LOCATION
+                                        },
+                                        MY_PERMISSIONS_REQUEST_LOCATION);
                             }
                         })
                         .create()
                         .show();
 
-
             } else {
                 ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION );
+                        new String[] {
+                                Manifest.permission.ACCESS_FINE_LOCATION
+                        },
+                        MY_PERMISSIONS_REQUEST_LOCATION);
             }
         }
     }
 
-    @SuppressLint({"MissingSuperCall", "MissingPermission"})
+    @SuppressLint({
+            "MissingSuperCall",
+            "MissingPermission"
+    })
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
@@ -221,32 +221,47 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         gMap.animateCamera(CameraUpdateFactory.newLatLng(selectedPlace));
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        List < Address > addresses = null;
         try {
-            List<Address> addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
+            addresses = geocoder.getFromLocation(selectedAwal.latitude, selectedAwal.longitude, 1);
+            if (addresses != null) {
+                Address data_awal = addresses.get(0);
+                StringBuilder street_awal = new StringBuilder();
+
+                for (int i = 0; i <= data_awal.getMaxAddressLineIndex(); i++) {
+                    street_awal.append(data_awal.getAddressLine(i)).append("\n");
+                }
+
+                tmp_street_awal = street_awal.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
             if (addresses != null) {
                 Address data_tujuan = addresses.get(0);
                 StringBuilder street_tujuan = new StringBuilder();
 
-                for (int i=0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
                     street_tujuan.append(data_tujuan.getAddressLine(i)).append("\n");
                 }
 
                 txtSelectedPlace.setText(street_tujuan.toString());
                 tmp_street_tujuan = street_tujuan.toString();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Tidak dapat menemukan alamat!", Toast.LENGTH_SHORT).show();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(this, "Tidak dapat menemukan alamat!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void saveOrder() {
-        Map<String, Object> order = new HashMap<>();
-        Map<String, Object> data_tujuan = new HashMap<>();
-        Map<String, Object> data_awal = new HashMap<>();
+        Map < String, Object > order = new HashMap <> ();
+        Map < String, Object > data_tujuan = new HashMap <> ();
+        Map < String, Object > data_awal = new HashMap <> ();
 
         String name = editTextName.getText().toString();
         String orderId = txtOrderId;
@@ -255,27 +270,26 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
         String currentTime = df.format(now);
 
+        DocumentReference ref = db.collection("orders").document();
+        String myId = ref.getId();
+
+        data_awal.put("address", tmp_street_awal);
+        data_awal.put("lat", saveLat);
+        data_awal.put("lng", saveLong);
 
         data_tujuan.put("address", txtSelectedPlace.getText().toString());
         data_tujuan.put("lat", selectedPlace.latitude);
         data_tujuan.put("lng", selectedPlace.longitude);
 
-        data_awal.put("lat", saveLat);
-        data_awal.put("lng", saveLong);
-
-        DocumentReference ref = db.collection("orders").document();
-        String myId = ref.getId();
-        
         order.put("id", myId);
         order.put("name", name);
         order.put("date", currentTime);
-        
+
         order.put("dataawal", data_awal);
+        order.put("awal", tmp_street_awal);
 
         order.put("datatujuan", data_tujuan);
         order.put("tujuan", tmp_street_tujuan);
-        
-
 
         if (isNewOrder) {
             db.collection("orders")
@@ -284,8 +298,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                     .addOnFailureListener(e -> {
                         Toast.makeText(this, "Gagal tambah data pesanan", Toast.LENGTH_SHORT).show();
                     });
-        }
-        else {
+        } else {
             db.collection("orders")
                     .document(orderId)
                     .set(order)
