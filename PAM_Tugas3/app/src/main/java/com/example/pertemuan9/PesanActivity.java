@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,13 +18,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -37,10 +36,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -69,10 +65,10 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
     private double saveLong;
 
     SupportMapFragment supportMapFragment;
-    LocationRequest mLocationRequest;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    FusedLocationProviderClient mFusedLocationClient;
+    LocationRequest locationRequest;
+    Location lastLocation;
+    Marker currLocationMarker;
+    FusedLocationProviderClient client;
 
 
     private boolean isNewOrder = true;
@@ -88,7 +84,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
 
         db = FirebaseFirestore.getInstance();
 
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        client = LocationServices.getFusedLocationProviderClient(this);
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
@@ -101,8 +97,8 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
     public void onPause() {
         super.onPause();
 
-        if (mFusedLocationClient != null) {
-            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+        if (client != null) {
+            client.removeLocationUpdates(mLocationCallback);
         }
     }
 
@@ -113,49 +109,48 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
             if (locationList.size() > 0) {
                 Location location = locationList.get(locationList.size() - 1);
                 Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
-                mLastLocation = location;
-                if (mCurrLocationMarker != null) {
-                    mCurrLocationMarker.remove();
+                lastLocation = location;
+                if (currLocationMarker != null) {
+                    currLocationMarker.remove();
                 }
 
-                //Place current location marker
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                saveLat = location.getLatitude();
-                saveLong = location.getLongitude();
+                // marker ke lokasi awal
+                LatLng awal = new LatLng(location.getLatitude(), location.getLongitude());
 
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
+                markerOptions.position(awal);
                 markerOptions.title("Current Position");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                currLocationMarker = gMap.addMarker(markerOptions);
 
-                mCurrLocationMarker = gMap.addMarker(markerOptions);
-//                gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                // marker ke tujuan awal
+                saveLat = location.getLatitude();
+                saveLong = location.getLongitude();
+                LatLng tujuan = new LatLng(saveLat, saveLong);
 
-                LatLng salatiga = new LatLng(saveLat, saveLong);
-
-                selectedPlace = salatiga;
+                selectedPlace = tujuan;
                 selectedMarker = gMap.addMarker(new MarkerOptions().position(selectedPlace));
-
                 gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
             }
         }
     };
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         gMap = googleMap;
 
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120000);
-        mLocationRequest.setFastestInterval(120000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(120000);
+        locationRequest.setFastestInterval(120000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 //Location Permission already granted
-                mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
                 gMap.setMyLocationEnabled(true);
             } else {
                 //Request Location Permission
@@ -163,7 +158,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
             }
         }
         else {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+            client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
             gMap.setMyLocationEnabled(true);
         }
 
@@ -203,6 +198,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
+    @SuppressLint({"MissingSuperCall", "MissingPermission"})
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -212,10 +208,9 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+                        client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
                         gMap.setMyLocationEnabled(true);
                     }
-
                 } else {
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
