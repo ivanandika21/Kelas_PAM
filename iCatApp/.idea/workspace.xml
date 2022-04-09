@@ -11,10 +11,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e00018ba-c9d4-4180-a09f-cab23d77fa51" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/PesananAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/java/com/example/pertemuan9/PesananAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/row_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/layout/row_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values-night/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PAM_Tugas3/app/src/main/res/values/themes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -41,7 +41,6 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
         holder.var_nama.setText(pesanan.getName());
         holder.var_awal.setText(pesanan.getAwal());
         holder.var_tujuan.setText(pesanan.getTujuan());
-        holder.var_id.setText(pesanan.getId());
         holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +58,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
 
     public static class MyViewHolder extends  RecyclerView.ViewHolder {
 
-        TextView var_tanggal, var_nama, var_awal, var_tujuan, var_id;
+        TextView var_tanggal, var_nama, var_awal, var_tujuan;
         LinearLayout var_mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -69,7 +68,6 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.MyViewHo
             var_nama = itemView.findViewById(R.id.id_nama);
             var_awal = itemView.findViewById(R.id.id_awal);
             var_tujuan = itemView.findViewById(R.id.id_tujuan);
-            var_id = itemView.findViewById(R.id.id_idorder);
             var_mainLayout = itemView.findViewById(R.id.id_mainLayout);
         }
     }

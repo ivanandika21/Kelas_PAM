@@ -25,23 +25,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:gravity="center">
 
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="ID"
-                    android:textStyle="bold"
-                    android:textColor="@color/blue_500"/>
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/ic_dot"/>
 
                 <TextView
                     android:layout_weight="9"
-                    android:id="@+id/id_idorder"
+                    android:id="@+id/id_nama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/blue_500"
                     android:text="TextView"
-                    android:textColor="@color/blue_500"/>
+                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -57,28 +58,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_weight="9"
                     android:id="@+id/id_tanggal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:text="Nama"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/id_nama"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
@@ -90,10 +70,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textView3"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Awal"
+                    android:text="Dari"
                     android:textStyle="bold" />
 
                 <TextView
@@ -109,10 +89,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textView4"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Tujuan"
+                    android:text="Ke"
                     android:textStyle="bold" />
 
                 <TextView
