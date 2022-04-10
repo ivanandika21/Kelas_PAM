@@ -207,7 +207,7 @@ public class PesanActivity extends AppCompatActivity implements OnMapReadyCallba
                         gMap.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "Permintaak akses lokasi ditolak", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Permintaan akses lokasi ditolak", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

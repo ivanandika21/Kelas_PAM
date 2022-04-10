@@ -7,6 +7,13 @@
     android:background="#EFEFEF"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/id_kosong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:src="@drawable/empty"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/id_recycler"
         android:layout_width="match_parent"
