@@ -20,7 +20,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class DaftarActivity extends AppCompatActivity {
 
     private EditText var_namalengkap, var_email, var_katasandi, var_konfirmasi;
-    private Button var_btndaftar, var_btnkemasuk;
+    private Button var_btndaftar, var_btnkembali;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -34,7 +34,7 @@ public class DaftarActivity extends AppCompatActivity {
         var_katasandi = findViewById(R.id.id_katasandi);
         var_konfirmasi = findViewById(R.id.id_konfirmasi);
 
-        var_btnkemasuk = findViewById(R.id.id_btnkemasuk);
+        var_btnkembali = findViewById(R.id.id_btnkembali);
         var_btndaftar = findViewById(R.id.id_btndaftar);
 
         mAuth = FirebaseAuth.getInstance();
@@ -44,8 +44,9 @@ public class DaftarActivity extends AppCompatActivity {
         progressDialog.setMessage("Mohon tunggu ...");
         progressDialog.setCancelable(false);
 
-        var_btnkemasuk.setOnClickListener(view -> {
+        var_btnkembali.setOnClickListener(view -> {
             finish();
+            startActivity(new Intent(getApplicationContext(), LandingActivity.class));
         });
 
         var_btndaftar.setOnClickListener(view -> {

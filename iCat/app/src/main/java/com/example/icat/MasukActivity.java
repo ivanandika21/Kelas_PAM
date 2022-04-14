@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MasukActivity extends AppCompatActivity {
 
     private EditText var_email, var_katasandi;
-    private Button var_btnmasuk, var_btnkedaftar;
+    private Button var_btnmasuk, var_btnkembali;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -37,7 +37,7 @@ public class MasukActivity extends AppCompatActivity {
         var_email = findViewById(R.id.id_email);
         var_katasandi = findViewById(R.id.id_katasandi);
 
-        var_btnkedaftar = findViewById(R.id.id_btnkedaftar);
+        var_btnkembali = findViewById(R.id.id_btnkembali);
         var_btnmasuk = findViewById(R.id.id_btnmasuk);
 
         mAuth = FirebaseAuth.getInstance();
@@ -47,8 +47,9 @@ public class MasukActivity extends AppCompatActivity {
         progressDialog.setMessage("Mohon tunggu ...");
         progressDialog.setCancelable(false);
 
-        var_btnkedaftar.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), DaftarActivity.class));
+        var_btnkembali.setOnClickListener(view -> {
+            finish();
+            startActivity(new Intent(getApplicationContext(), LandingActivity.class));
         });
 
         var_btnmasuk.setOnClickListener(view -> {
