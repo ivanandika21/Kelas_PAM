@@ -1,67 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue_primary"
+    android:orientation="vertical"
     tools:context=".MasukActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Masuk"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/white"
-            app:boxBackgroundMode="outline"
-            android:layout_marginTop="10dp">
+            android:padding="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Masuk"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="32dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Halo! kamu dapat masuk menggunakan akun yang telah terdaftar"
+                android:textColor="@color/white"
+                android:textSize="16dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="40dp"
+            android:gravity="center"
+            android:background="@drawable/rounded_bg"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/profil_dark"/>
 
             <EditText
                 android:id="@+id/id_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="25dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/rounded_input"
                 android:hint="Email"
                 android:inputType="textEmailAddress"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/white"
-            app:boxBackgroundMode="outline"
-            android:layout_marginTop="10dp"
-            app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/id_katasandi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingVertical="15dp"
+                android:paddingHorizontal="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_input"
                 android:hint="Kata Sandi"
                 android:inputType="textPassword"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/id_btnkedaftar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Belum punya akun?"/>
+            <Button
+                android:id="@+id/id_btnkedaftar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/blue_primary"
+                android:layout_gravity="center"
+                android:text="Belum punya akun?"/>
 
-        <Button
-            android:id="@+id/id_btnmasuk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Masuk"/>
+            <Button
+                android:id="@+id/id_btnmasuk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rounded_btn"
+                android:stateListAnimator="@null"
+                android:text="Masuk"/>
+        </LinearLayout>
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

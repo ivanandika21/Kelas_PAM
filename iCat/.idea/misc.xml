@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/rouded_btn.xml" value="0.1255" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/rounded_bg.xml" value="0.12" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/drawable/rounded_input.xml" value="0.1255" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_daftar.xml" value="0.19158878504672897" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_masuk.xml" value="0.25" />
