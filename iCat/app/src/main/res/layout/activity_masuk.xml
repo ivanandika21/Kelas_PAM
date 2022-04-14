@@ -43,7 +43,7 @@
             app:passwordToggleEnabled="true">
 
             <EditText
-                android:id="@+id/id_password"
+                android:id="@+id/id_katasandi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Kata Sandi"
@@ -51,11 +51,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/id_kemasuk"
+            android:id="@+id/id_btnkedaftar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Sudah punya akun?"/>
+            android:text="Belum punya akun?"/>
 
         <Button
             android:id="@+id/id_btnmasuk"

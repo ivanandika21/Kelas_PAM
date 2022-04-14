@@ -13,10 +13,16 @@
         android:layout_height="wrap_content"
         android:text="Halo!" />
     <TextView
-        android:id="@+id/id_name"
+        android:id="@+id/id_namalengkap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="..."
         android:layout_below="@id/id_halo"/>
+    <Button
+        android:id="@+id/id_btnlogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keluar"
+        android:layout_below="@+id/id_namalengkap"/>
 
 </RelativeLayout>
