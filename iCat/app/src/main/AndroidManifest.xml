@@ -10,11 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICat">
         <activity
+            android:name=".LayananActivity"
+            android:exported="false" />
+        <activity
             android:name=".LandingActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

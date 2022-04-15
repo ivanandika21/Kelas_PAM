@@ -108,6 +108,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/id_btnlayanan"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 app:strokeWidth="2dp"
