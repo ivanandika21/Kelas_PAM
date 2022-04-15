@@ -6,8 +6,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView var_namalengkap;
     private FirebaseUser firebaseUser;
-    private Button var_btnlogout;
+    private ImageView var_btnlogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
