@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView var_namalengkap;
     private FirebaseUser firebaseUser;
     private ImageView var_btnlogout;
-    private MaterialCardView var_btnlayanan;
+    private MaterialCardView var_btngrooming, var_btnpetshop, var_btnlayanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         var_namalengkap = findViewById(R.id.id_namalengkap);
 
         var_btnlogout = findViewById(R.id.id_btnlogout);
+        var_btngrooming = findViewById(R.id.id_btngrooming);
+        var_btnpetshop = findViewById(R.id.id_btnpetshop);
         var_btnlayanan = findViewById(R.id.id_btnlayanan);
 
         if (firebaseUser != null) {
@@ -42,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
         var_btnlogout.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
             finish();
+        });
+
+        var_btngrooming.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), GroomingActivity.class));
+        });
+
+        var_btnpetshop.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), GroomingActivity.class));
         });
 
         var_btnlayanan.setOnClickListener(view -> {
