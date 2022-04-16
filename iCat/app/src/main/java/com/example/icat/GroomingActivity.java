@@ -60,7 +60,7 @@ public class GroomingActivity extends AppCompatActivity {
         var_btnkemaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MapsGroomingActivity.class);
                 intent.putExtra("jenislayananbaru", jenislayananbaru);
                 intent.putExtra("jeniskucing", jeniskucing);
                 startActivity(intent);
