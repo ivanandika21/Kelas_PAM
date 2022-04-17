@@ -29,18 +29,6 @@ public class GroomingActivity extends AppCompatActivity {
         var_layananmedical = findViewById(R.id.id_layananmedical);
         var_layananhealth = findViewById(R.id.id_layananhealth);
 
-        if (var_layananstandar.isChecked()){
-            jenislayanan.add("Standar Grooming");
-        }
-        if (var_layananmedical.isChecked()){
-            jenislayanan.add("Medical Grooming");
-        }
-        if (var_layananhealth.isChecked()){
-            jenislayanan.add("Health Grooming");
-        }
-
-        jenislayananbaru = jenislayanan.toString();
-
         bulu = findViewById(R.id.bulu);
         bulu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -60,6 +48,18 @@ public class GroomingActivity extends AppCompatActivity {
         var_btnkemaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (var_layananstandar.isChecked()){
+                    jenislayanan.add("Standar Grooming");
+                }
+                if (var_layananmedical.isChecked()){
+                    jenislayanan.add("Medical Grooming");
+                }
+                if (var_layananhealth.isChecked()){
+                    jenislayanan.add("Health Grooming");
+                }
+
+                jenislayananbaru = jenislayanan.toString().replaceAll("[\\[\\]]", "");
+
                 Intent intent = new Intent(getApplicationContext(), MapsGroomingActivity.class);
                 intent.putExtra("jenislayananbaru", jenislayananbaru);
                 intent.putExtra("jeniskucing", jeniskucing);

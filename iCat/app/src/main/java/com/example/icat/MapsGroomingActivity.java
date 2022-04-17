@@ -17,8 +17,9 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,14 +32,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -50,90 +51,111 @@ import java.util.Map;
 
 public class MapsGroomingActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
-    private GoogleMap gMap;
-    private FirebaseFirestore db;
+    private GoogleMap googleMap;
+    private FirebaseFirestore database;
     private FusedLocationProviderClient client;
     private SupportMapFragment supportMapFragment;
     private LocationRequest locationRequest;
-    private Button var_btnpesangrooming;
-
-    private Marker selectedMarker;
-    private LatLng selectedPlace, selectedAwal;
-    private TextView txtSelectedPlace;
-    private String tmp_street_tujuan, tmp_street_awal;
-    private double saveLat;
-    private double saveLong;
+    private Button var_btnPesan;
+    private ImageButton var_btnLokasiku;
+    private Marker markerTerpilih;
+    private LatLng latlngTerpilih;
+    private TextView var_lokasiTerpilih;
+    private String var_jalan, atasnama;
+    private double saveLat, saveLong;
     private boolean isNewOrder = true;
-    private String txtOrderId;
     private Location lastLocation;
-    private Marker currLocationMarker;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps_grooming);
 
-        txtSelectedPlace = findViewById(R.id.txt_selectedPlace);
+        var_lokasiTerpilih = findViewById(R.id.txt_selectedPlace);
 
-        db = FirebaseFirestore.getInstance();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        atasnama = firebaseUser.getDisplayName();
+
+        database = FirebaseFirestore.getInstance();
         client = LocationServices.getFusedLocationProviderClient(this);
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
 
-        var_btnpesangrooming = findViewById(R.id.id_btnpesangrooming);
-        var_btnpesangrooming.setOnClickListener(view -> { saveOrder(); });
+        var_btnLokasiku = findViewById(R.id.id_btnlokasiku);
+        var_btnLokasiku.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng tujuan = new LatLng(saveLat, saveLong);
+
+                latlngTerpilih = tujuan;
+                markerTerpilih.setPosition(latlngTerpilih);
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latlngTerpilih));
+
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                List <Address> addresses = null;
+                try {
+                    addresses = geocoder.getFromLocation(latlngTerpilih.latitude, latlngTerpilih.longitude, 1);
+                    if (addresses != null) {
+                        Address data_tujuan = addresses.get(0);
+                        StringBuilder jalan = new StringBuilder();
+
+                        for (int i = 0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
+                            jalan.append(data_tujuan.getAddressLine(i)).append("\n");
+                        }
+
+                        var_lokasiTerpilih.setText(jalan.toString());
+                        var_jalan = jalan.toString();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Alamat tidak ditemukan, coba pilih area disekitarmu!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Alamat tidak ditemukan, coba pilih area disekitarmu!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        var_btnPesan = findViewById(R.id.id_btnpesan);
+        var_btnPesan.setOnClickListener(view -> {
+                saveOrder();
+        });
     }
 
     private void saveOrder() {
-        Map< String, Object > order = new HashMap<>();
-        Map < String, Object > data_tujuan = new HashMap <> ();
-        Map < String, Object > data_awal = new HashMap <> ();
+        Map <String, Object> order = new HashMap <> ();
+        Map <String, Object> data_tujuan = new HashMap <> ();
 
-        String orderId = txtOrderId;
+        Intent intent = getIntent();
+        String jenislayanan = intent.getStringExtra("jenislayananbaru");
+        String jeniskucing = intent.getStringExtra("jeniskucing");
 
         Date now = Calendar.getInstance().getTime();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
         String currentTime = df.format(now);
 
-        DocumentReference ref = db.collection("orders").document();
+        DocumentReference ref = database.collection("orders").document();
         String myId = ref.getId();
 
-        data_awal.put("address", tmp_street_awal);
-        data_awal.put("lat", saveLat);
-        data_awal.put("lng", saveLong);
-
-        data_tujuan.put("address", txtSelectedPlace.getText().toString());
-        data_tujuan.put("lat", selectedPlace.latitude);
-        data_tujuan.put("lng", selectedPlace.longitude);
+        data_tujuan.put("address", var_lokasiTerpilih.getText().toString());
+        data_tujuan.put("lat", latlngTerpilih.latitude);
+        data_tujuan.put("lng", latlngTerpilih.longitude);
+        order.put("datatujuan", data_tujuan);
+        order.put("tujuan", var_jalan);
 
         order.put("id", myId);
-        order.put("date", currentTime);
+        order.put("jenislayanan", jenislayanan);
+        order.put("jeniskucing", jeniskucing);
+        order.put("tanggal", currentTime);
+        order.put("atasnama", atasnama);
 
-        order.put("dataawal", data_awal);
-        order.put("awal", tmp_street_awal);
+        database.collection("grooming")
+            .document(myId)
+            .set(order)
+            .addOnFailureListener(e-> {
+                    Toast.makeText(this, "Gagal tambah data pesanan", Toast.LENGTH_SHORT).show();
+        });
 
-        order.put("datatujuan", data_tujuan);
-        order.put("tujuan", tmp_street_tujuan);
-
-        if (isNewOrder) {
-            db.collection("orders")
-                    .document(myId)
-                    .set(order)
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal tambah data pesanan", Toast.LENGTH_SHORT).show();
-                    });
-        } else {
-            db.collection("orders")
-                    .document(orderId)
-                    .set(order)
-                    .addOnSuccessListener(unused -> {
-                        isNewOrder = true;
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Gagal ubah data pesanan", Toast.LENGTH_SHORT).show();
-                    });
-        }
         Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
         this.finish();
@@ -143,67 +165,48 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-        gMap = googleMap;
+        this.googleMap = googleMap;
 
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(120000);
-        locationRequest.setFastestInterval(120000);
+        locationRequest.setInterval(360000);
+        locationRequest.setFastestInterval(360000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
-                gMap.setMyLocationEnabled(true);
+                this.googleMap.setMyLocationEnabled(true);
             } else {
                 checkLocationPermission();
             }
         } else {
             client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
-            gMap.setMyLocationEnabled(true);
+            this.googleMap.setMyLocationEnabled(true);
         }
-
-        gMap.setOnMapClickListener(this);
-
-
+        this.googleMap.setOnMapClickListener(this);
     }
 
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
-        selectedPlace = latLng;
-        selectedMarker.setPosition(selectedPlace);
-        gMap.animateCamera(CameraUpdateFactory.newLatLng(selectedPlace));
+        latlngTerpilih = latLng;
+        markerTerpilih.setPosition(latlngTerpilih);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latlngTerpilih));
 
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
         List <Address> addresses = null;
         try {
-            addresses = geocoder.getFromLocation(selectedAwal.latitude, selectedAwal.longitude, 1);
-            if (addresses != null) {
-                Address data_awal = addresses.get(0);
-                StringBuilder street_awal = new StringBuilder();
-
-                for (int i = 0; i <= data_awal.getMaxAddressLineIndex(); i++) {
-                    street_awal.append(data_awal.getAddressLine(i)).append("\n");
-                }
-
-                tmp_street_awal = street_awal.toString();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            addresses = geocoder.getFromLocation(selectedPlace.latitude, selectedPlace.longitude, 1);
+            addresses = geocoder.getFromLocation(latlngTerpilih.latitude, latlngTerpilih.longitude, 1);
             if (addresses != null) {
                 Address data_tujuan = addresses.get(0);
-                StringBuilder street_tujuan = new StringBuilder();
+                StringBuilder jalan = new StringBuilder();
 
                 for (int i = 0; i <= data_tujuan.getMaxAddressLineIndex(); i++) {
-                    street_tujuan.append(data_tujuan.getAddressLine(i)).append("\n");
+                    jalan.append(data_tujuan.getAddressLine(i)).append("\n");
                 }
 
-                txtSelectedPlace.setText(street_tujuan.toString());
-                tmp_street_tujuan = street_tujuan.toString();
+                var_lokasiTerpilih.setText(jalan.toString());
+                var_jalan = jalan.toString();
             } else {
                 Toast.makeText(this, "Tidak dapat menemukan alamat!", Toast.LENGTH_SHORT).show();
             }
@@ -219,29 +222,20 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                new AlertDialog.Builder(this)
+                    new AlertDialog.Builder(this)
                         .setTitle("Membutuhkan Akses Lokasi")
                         .setMessage("Aplikasi ini membutuhkan akses lokasi untuk menentukan lokasi Anda")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(MapsGroomingActivity.this,
-                                        new String[] {
-                                                Manifest.permission.ACCESS_FINE_LOCATION
-                                        },
+                                        new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
                             }
-                        })
-                        .create()
-                        .show();
-
+                        }).create().show();
             } else {
                 ActivityCompat.requestPermissions(this,
-                        new String[] {
-                                Manifest.permission.ACCESS_FINE_LOCATION
-                        },
+                        new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
         }
@@ -254,13 +248,14 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+            case MY_PERMISSIONS_REQUEST_LOCATION:
+            {
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (ContextCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         client.requestLocationUpdates(locationRequest, mLocationCallback, Looper.myLooper());
-                        gMap.setMyLocationEnabled(true);
+                        googleMap.setMyLocationEnabled(true);
                     }
                 } else {
                     Toast.makeText(this, "Permintaan akses lokasi ditolak", Toast.LENGTH_LONG).show();
@@ -273,32 +268,18 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
-            List<Location> locationList = locationResult.getLocations();
+            List <Location> locationList = locationResult.getLocations();
             if (locationList.size() > 0) {
                 Location location = locationList.get(locationList.size() - 1);
                 lastLocation = location;
-                if (currLocationMarker != null) {
-                    currLocationMarker.remove();
-                }
 
-                // marker ke lokasi awal
-                LatLng awal = new LatLng(location.getLatitude(), location.getLongitude());
-
-                selectedAwal = awal;
-
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(awal);
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                currLocationMarker = gMap.addMarker(markerOptions);
-
-                // marker ke tujuan awal
                 saveLat = location.getLatitude();
                 saveLong = location.getLongitude();
                 LatLng tujuan = new LatLng(saveLat, saveLong);
 
-                selectedPlace = tujuan;
-                selectedMarker = gMap.addMarker(new MarkerOptions().position(selectedPlace));
-                gMap.animateCamera(CameraUpdateFactory.newLatLngZoom(selectedPlace, 15.0f));
+                latlngTerpilih = tujuan;
+                markerTerpilih = googleMap.addMarker(new MarkerOptions().position(latlngTerpilih));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlngTerpilih, 15.0f));
             }
         }
     };

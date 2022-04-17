@@ -16,23 +16,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="40dp"
-        android:padding="15dp"
-        android:background="@drawable/rounded_btn_menu_white"
+        android:orientation="horizontal"
+        android:padding="40dp"
+        android:background="@color/white"
         android:elevation="5dp">
 
         <TextView
             android:id="@+id/txt_selectedPlace"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginVertical="10dp"
             android:textAlignment="center"
             android:text="Pilih lokasi tujuanmu!"/>
+
+        <ImageButton
+            android:id="@+id/id_btnlokasiku"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_location"
+            android:stateListAnimator="@null"
+            android:background="@drawable/rounded_btn_menu_blue"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/id_btnpesangrooming"
+        android:id="@+id/id_btnpesan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="40dp"
