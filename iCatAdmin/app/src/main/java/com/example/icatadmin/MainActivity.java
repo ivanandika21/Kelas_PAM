@@ -1,4 +1,4 @@
-package com.example.icat;
+package com.example.icatadmin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,10 +24,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class LihatPesananActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ArrayList<PesananGrooming> pesananGroomingList;
-    private PesananGroomingAdapter pesananGroomingAdapter;
+    private ArrayList<Pesanan> pesananList;
+    private PesananAdapter pesananAdapter;
     private ProgressDialog progressDialog;
     private FirebaseFirestore db;
     private ImageView var_kosong;
@@ -36,7 +36,7 @@ public class LihatPesananActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lihat_pesanan);
+        setContentView(R.layout.activity_main);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -50,13 +50,13 @@ public class LihatPesananActivity extends AppCompatActivity {
         var_kosong = findViewById(R.id.id_kosong);
 
         db = FirebaseFirestore.getInstance();
-        pesananGroomingList = new ArrayList<PesananGrooming>();
-        pesananGroomingAdapter = new PesananGroomingAdapter(LihatPesananActivity.this, pesananGroomingList);
+        pesananList = new ArrayList<Pesanan>();
+        pesananAdapter = new PesananAdapter(MainActivity.this, pesananList);
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         atasnama = firebaseUser.getDisplayName();
 
-        recyclerView.setAdapter(pesananGroomingAdapter);
+        recyclerView.setAdapter(pesananAdapter);
         cekisi();
     }
 
@@ -86,7 +86,7 @@ public class LihatPesananActivity extends AppCompatActivity {
     }
 
     private void EventChangeListener() {
-        db.collection("grooming").whereEqualTo("atasnama", atasnama)
+        db.collection("grooming")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -101,10 +101,10 @@ public class LihatPesananActivity extends AppCompatActivity {
 
                         for (DocumentChange dc : value.getDocumentChanges()){
                             if (dc.getType() == DocumentChange.Type.ADDED){
-                                pesananGroomingList.add(dc.getDocument().toObject(PesananGrooming.class));
+                                pesananList.add(dc.getDocument().toObject(Pesanan.class));
                             }
 
-                            pesananGroomingAdapter.notifyDataSetChanged();
+                            pesananAdapter.notifyDataSetChanged();
                             if (progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }
