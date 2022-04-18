@@ -16,9 +16,12 @@
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_grooming.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_landing.xml" value="0.25" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_layanan.xml" value="0.16485507246376813" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_lihat_pesanan.xml" value="0.2" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_maps_grooming.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/activity_masuk.xml" value="0.25" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/fragment_lihat_pesanan.xml" value="0.16394927536231885" />
+        <entry key="..\:/Users/ivana/Documents/Kelas_PAM/iCat/app/src/main/res/layout/list_pesanan_grooming.xml" value="0.16394927536231885" />
       </map>
     </option>
   </component>

@@ -148,6 +148,7 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
         order.put("jeniskucing", jeniskucing);
         order.put("tanggal", currentTime);
         order.put("atasnama", atasnama);
+        order.put("status", "Dipesan");
 
         database.collection("grooming")
             .document(myId)
@@ -283,6 +284,4 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
             }
         }
     };
-
-
 }

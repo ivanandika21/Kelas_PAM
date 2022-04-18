@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView var_namalengkap;
     private FirebaseUser firebaseUser;
     private ImageView var_btnlogout;
-    private MaterialCardView var_btngrooming, var_btnpetshop, var_btnlayanan;
+    private MaterialCardView var_btngrooming, var_btnpetshop, var_btnlayanan, var_btnPesananGrooming;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         var_btngrooming = findViewById(R.id.id_btngrooming);
         var_btnpetshop = findViewById(R.id.id_btnpetshop);
         var_btnlayanan = findViewById(R.id.id_btnlayanan);
+        var_btnPesananGrooming = findViewById(R.id.id_btnPesananGrooming);
 
         if (firebaseUser != null) {
             var_namalengkap.setText(firebaseUser.getDisplayName());
@@ -56,6 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
         var_btnlayanan.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), LayananActivity.class));
+        });
+
+        var_btnPesananGrooming.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), LihatPesananActivity.class));
         });
     }
 }
