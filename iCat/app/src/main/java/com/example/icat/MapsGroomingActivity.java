@@ -230,14 +230,14 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 ActivityCompat.requestPermissions(MapsGroomingActivity.this,
-                                        new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-                                        MY_PERMISSIONS_REQUEST_LOCATION);
+                                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                                    MY_PERMISSIONS_REQUEST_LOCATION);
                             }
                         }).create().show();
             } else {
                 ActivityCompat.requestPermissions(this,
-                        new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+                    new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
             }
         }
     }
@@ -269,19 +269,19 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
-            List <Location> locationList = locationResult.getLocations();
-            if (locationList.size() > 0) {
-                Location location = locationList.get(locationList.size() - 1);
-                lastLocation = location;
+        List <Location> locationList = locationResult.getLocations();
+        if (locationList.size() > 0) {
+            Location location = locationList.get(locationList.size() - 1);
+            lastLocation = location;
 
-                saveLat = location.getLatitude();
-                saveLong = location.getLongitude();
-                LatLng tujuan = new LatLng(saveLat, saveLong);
+            saveLat = location.getLatitude();
+            saveLong = location.getLongitude();
+            LatLng tujuan = new LatLng(saveLat, saveLong);
 
-                latlngTerpilih = tujuan;
-                markerTerpilih = googleMap.addMarker(new MarkerOptions().position(latlngTerpilih));
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlngTerpilih, 15.0f));
-            }
+            latlngTerpilih = tujuan;
+            markerTerpilih = googleMap.addMarker(new MarkerOptions().position(latlngTerpilih));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlngTerpilih, 15.0f));
+        }
         }
     };
 }

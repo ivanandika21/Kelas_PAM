@@ -1,20 +1,27 @@
 package com.example.icat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PesananGroomingAdapter extends RecyclerView.Adapter<PesananGroomingAdapter.GroomingViewHolder> {
     Context context;
     ArrayList<PesananGrooming> pesananGroomingList;
+    private FirebaseFirestore database;
 
     public PesananGroomingAdapter(Context context, ArrayList<PesananGrooming> pesananGroomingList) {
         this.context = context;
@@ -39,6 +46,38 @@ public class PesananGroomingAdapter extends RecyclerView.Adapter<PesananGrooming
         holder.var_jenislayanan.setText(pesananGrooming.getJenislayanan());
         holder.var_tujuan.setText(pesananGrooming.getTujuan());
         holder.var_status.setText(pesananGrooming.getStatus());
+
+        database = FirebaseFirestore.getInstance();
+        String myId = pesananGrooming.getId();
+
+        holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Batalkan Pesanan?")
+                        .setContentText("Anda tetap harus menunggu pihak iCat untuk menanggapi!")
+                        .setConfirmText("Ya")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                database.collection("grooming")
+                                        .document(myId)
+                                        .update("status", "Meminta pembatalan");
+                                sDialog.dismissWithAnimation();
+                                ((LihatPesananActivity) context).finish();
+                                Intent refresh = new Intent(context, LihatPesananActivity.class);
+                                context.startActivity(refresh);
+                            }
+                        })
+                        .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
+            }
+        });
     }
 
     @Override
