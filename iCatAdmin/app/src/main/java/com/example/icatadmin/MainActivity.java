@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseFirestore db;
     private ImageView var_kosong;
+    private ImageView var_btnlogout;
     private String atasnama;
 
     @Override
@@ -58,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(pesananAdapter);
         cekisi();
+
+        var_btnlogout = findViewById(R.id.id_btnlogout);
+        var_btnlogout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            finish();
+        });
     }
 
     private void cekisi(){

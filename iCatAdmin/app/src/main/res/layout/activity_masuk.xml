@@ -71,17 +71,6 @@
                 android:inputType="textPassword"/>
 
             <Button
-                android:id="@+id/id_btnkembali"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@android:color/transparent"
-                android:textColor="@color/blue_primary"
-                android:layout_gravity="center"
-                android:text="Kembali ke landing"
-                android:textAllCaps="false"/>
-
-            <Button
                 android:id="@+id/id_btnmasuk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

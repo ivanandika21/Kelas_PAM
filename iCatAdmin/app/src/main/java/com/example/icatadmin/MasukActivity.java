@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MasukActivity extends AppCompatActivity {
 
     private EditText var_email, var_katasandi;
-    private Button var_btnmasuk, var_btnkembali;
+    private Button var_btnmasuk;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -31,7 +31,6 @@ public class MasukActivity extends AppCompatActivity {
         var_email = findViewById(R.id.id_email);
         var_katasandi = findViewById(R.id.id_katasandi);
 
-        var_btnkembali = findViewById(R.id.id_btnkembali);
         var_btnmasuk = findViewById(R.id.id_btnmasuk);
 
         mAuth = FirebaseAuth.getInstance();

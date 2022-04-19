@@ -41,7 +41,6 @@ public class PesananGroomingAdapter extends RecyclerView.Adapter<PesananGrooming
         PesananGrooming pesananGrooming = pesananGroomingList.get(position);
 
         holder.var_tanggal.setText(pesananGrooming.getTanggal());
-        holder.var_atasnama.setText(pesananGrooming.getAtasnama());
         holder.var_jeniskucing.setText(pesananGrooming.getJeniskucing());
         holder.var_jenislayanan.setText(pesananGrooming.getJenislayanan());
         holder.var_tujuan.setText(pesananGrooming.getTujuan());
@@ -86,14 +85,13 @@ public class PesananGroomingAdapter extends RecyclerView.Adapter<PesananGrooming
     }
 
     public static class GroomingViewHolder extends RecyclerView.ViewHolder {
-        TextView var_tanggal, var_atasnama, var_jeniskucing, var_jenislayanan, var_tujuan, var_status;
+        TextView var_tanggal, var_jeniskucing, var_jenislayanan, var_tujuan, var_status;
         LinearLayout var_mainLayout;
 
         public GroomingViewHolder(@NonNull View itemView) {
             super(itemView);
 
             var_tanggal = itemView.findViewById(R.id.id_tanggal);
-            var_atasnama = itemView.findViewById(R.id.id_atasnama);
             var_jeniskucing = itemView.findViewById(R.id.id_jeniskucing);
             var_jenislayanan = itemView.findViewById(R.id.id_jenislayanan);
             var_tujuan = itemView.findViewById(R.id.id_tujuan);

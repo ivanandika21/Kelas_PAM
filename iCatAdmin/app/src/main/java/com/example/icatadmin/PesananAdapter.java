@@ -1,6 +1,7 @@
 package com.example.icatadmin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.GroomingViewHolder> {
     Context context;
     ArrayList<Pesanan> pesananList;
+    private FirebaseFirestore database;
 
     public PesananAdapter(Context context, ArrayList<Pesanan> pesananList) {
         this.context = context;
@@ -39,6 +45,89 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
         holder.var_jenislayanan.setText(pesanan.getJenislayanan());
         holder.var_tujuan.setText(pesanan.getTujuan());
         holder.var_status.setText(pesanan.getStatus());
+
+        database = FirebaseFirestore.getInstance();
+        String myId = pesanan.getId();
+        String statusPesanan = pesanan.getStatus();
+
+        holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (statusPesanan.equals("Meminta pembatalan")) {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Konfirmasi Pembatalan?")
+                            .setContentText("Status pesanan pelanggan akan berubah menjadi dibatalkan")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Pesanan dibatalkan");
+                                    sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                } else if (statusPesanan.equals("Diproses")){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Konfirmasi Pengiriman?")
+                            .setContentText("Status pesanan pelanggan akan berubah menjadi dikirim")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Dikirim");
+                                    sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                } else {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Konfirmasi Pesanan?")
+                            .setContentText("Status pesanan pelanggan akan berubah menjadi diproses")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Diproses");
+                                    sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                }
+            }
+        });
     }
 
     @Override
