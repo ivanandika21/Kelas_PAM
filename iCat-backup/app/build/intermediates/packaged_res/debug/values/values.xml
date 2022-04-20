@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#FF404040</color>
+    <color name="blue_primary">#FF00B2FF</color>
+    <color name="gray">#FFF4F4F4</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">iCat</string>
+    <string name="default_web_client_id" translatable="false">427540570298-81h6hodusq9thgrqna5iuh6sgbg6g5d1.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">427540570298</string>
+    <string name="google_api_key" translatable="false">AIzaSyCk_R8LDayeKKaoBfRarWj_GIMN_70mqLc</string>
+    <string name="google_app_id" translatable="false">1:427540570298:android:10ac08807b0b3d917be283</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCk_R8LDayeKKaoBfRarWj_GIMN_70mqLc</string>
+    <string name="google_storage_bucket" translatable="false">kelas-pam-2022.appspot.com</string>
+    <string name="project_id" translatable="false">kelas-pam-2022</string>
+    <style name="Theme.ICat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorPrimaryVariant">@color/blue_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_primary</item>
+        <item name="colorSecondaryVariant">@color/blue_primary</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

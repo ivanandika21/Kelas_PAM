@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView var_namalengkap;
     private FirebaseUser firebaseUser;
     private ImageView var_btnlogout;
-    private MaterialCardView var_btngrooming, var_btnpetshop, var_btnlayanan, var_btnPesananGrooming;
+    private MaterialCardView var_btngrooming, var_btnlayanan, var_btnPesananGrooming, var_btnHubungi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         var_btnlogout = findViewById(R.id.id_btnlogout);
         var_btngrooming = findViewById(R.id.id_btngrooming);
-        var_btnpetshop = findViewById(R.id.id_btnpetshop);
         var_btnlayanan = findViewById(R.id.id_btnlayanan);
         var_btnPesananGrooming = findViewById(R.id.id_btnPesananGrooming);
+        var_btnHubungi = findViewById(R.id.id_btnHubungi);
 
         if (firebaseUser != null) {
             var_namalengkap.setText(firebaseUser.getDisplayName());
@@ -51,16 +52,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), GroomingActivity.class));
         });
 
-        var_btnpetshop.setOnClickListener(view -> {
-            startActivity(new Intent(getApplicationContext(), GroomingActivity.class));
-        });
-
         var_btnlayanan.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), LayananActivity.class));
         });
 
         var_btnPesananGrooming.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), LihatPesananActivity.class));
+        });
+
+        var_btnHubungi.setOnClickListener(view -> {
+            String url = "https://api.whatsapp.com/send?phone=62895391703636&text=Halo%20admin%2C%20aku%20mau%20tanya%0A";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         });
     }
 }

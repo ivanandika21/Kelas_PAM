@@ -17,22 +17,24 @@
             android:layout_height="match_parent"
             android:inAnimation="@android:anim/fade_in"
             android:outAnimation="@android:anim/fade_out"/>
+
         <ImageButton
             android:id="@+id/carouselBefore"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_close"
             android:layout_alignStart="@+id/carouselImage"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_before" />
+
         <ImageButton
             android:id="@+id/carouselNext"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_close"
             android:layout_alignEnd="@+id/carouselImage"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_next" />
     </RelativeLayout>
 
     <LinearLayout

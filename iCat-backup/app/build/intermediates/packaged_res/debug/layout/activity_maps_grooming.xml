@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsGroomingActivity"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="40dp"
+        android:background="@color/white"
+        android:elevation="5dp">
+
+        <TextView
+            android:id="@+id/txt_selectedPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginVertical="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="Pilih lokasi tujuanmu!"/>
+
+        <ImageButton
+            android:id="@+id/id_btnlokasiku"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_location"
+            android:stateListAnimator="@null"
+            android:background="@drawable/rounded_btn_menu_blue"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/id_btnpesan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:background="@drawable/rounded_btn"
+        android:stateListAnimator="@null"
+        android:layout_gravity="bottom"
+        android:text="Antar"/>
+</FrameLayout>

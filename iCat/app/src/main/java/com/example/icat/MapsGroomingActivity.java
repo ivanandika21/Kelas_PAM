@@ -35,6 +35,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -134,6 +135,8 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
         String currentTime = df.format(now);
 
+        Timestamp timestamp = new Timestamp(now);
+
         DocumentReference ref = database.collection("orders").document();
         String myId = ref.getId();
 
@@ -149,6 +152,7 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
         order.put("tanggal", currentTime);
         order.put("atasnama", atasnama);
         order.put("status", "Dipesan");
+        order.put("timestamp", timestamp);
 
         database.collection("grooming")
             .document(myId)

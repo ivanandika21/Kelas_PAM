@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LandingActivity extends AppCompatActivity {
 
     private Button var_btnkemasuk, var_btnkedaftar;
@@ -14,6 +16,9 @@ public class LandingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        FirebaseAuth.getInstance().signOut();
+
         setContentView(R.layout.activity_landing);
 
         var_btnkemasuk = findViewById(R.id.id_btnkemasuk);

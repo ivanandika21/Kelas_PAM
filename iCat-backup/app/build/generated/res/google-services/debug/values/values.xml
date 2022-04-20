@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">427540570298-81h6hodusq9thgrqna5iuh6sgbg6g5d1.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">427540570298</string>
+    <string name="google_api_key" translatable="false">AIzaSyCk_R8LDayeKKaoBfRarWj_GIMN_70mqLc</string>
+    <string name="google_app_id" translatable="false">1:427540570298:android:10ac08807b0b3d917be283</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCk_R8LDayeKKaoBfRarWj_GIMN_70mqLc</string>
+    <string name="google_storage_bucket" translatable="false">kelas-pam-2022.appspot.com</string>
+    <string name="project_id" translatable="false">kelas-pam-2022</string>
+</resources>
