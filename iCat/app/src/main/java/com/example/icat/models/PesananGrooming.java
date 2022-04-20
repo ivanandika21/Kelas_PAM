@@ -2,13 +2,14 @@ package com.example.icat.models;
 
 public class PesananGrooming {
 
-    String id, atasnama, jeniskucing, jenislayanan, tanggal, tujuan, status;
+    String id, atasnama, jenisgrooming, jeniskucing, jenislayanan, tanggal, tujuan, status;
 
     public PesananGrooming(){}
 
-    public PesananGrooming(String id, String atasnama, String jeniskucing, String jenislayanan, String tanggal, String tujuan, String status) {
+    public PesananGrooming(String id, String atasnama, String jenisgrooming, String jeniskucing, String jenislayanan, String tanggal, String tujuan, String status) {
         this.id = id;
         this.atasnama = atasnama;
+        this.jenisgrooming = jenisgrooming;
         this.jeniskucing = jeniskucing;
         this.jenislayanan = jenislayanan;
         this.tanggal = tanggal;
@@ -30,6 +31,14 @@ public class PesananGrooming {
 
     public void setAtasnama(String atasnama) {
         this.atasnama = atasnama;
+    }
+
+    public String getJenisgrooming() {
+        return jenisgrooming;
+    }
+
+    public void setJenisgrooming(String jenisgrooming) {
+        this.jenisgrooming = jenisgrooming;
     }
 
     public String getJeniskucing() {

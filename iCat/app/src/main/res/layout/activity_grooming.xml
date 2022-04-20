@@ -42,6 +42,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis Grooming"/>
+                <RadioGroup
+                    android:id="@+id/id_jenisGrooming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/id_layananStandar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Grooming Standar"/>
+                    <RadioButton
+                        android:id="@+id/id_layananMedical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Grooming Medical"/>
+                    <RadioButton
+                        android:id="@+id/id_layananHealth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Grooming Health"/>
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -49,20 +85,15 @@
                     android:layout_height="wrap_content"
                     android:text="Jenis Layanan"/>
                 <CheckBox
-                    android:id="@+id/id_layananstandar"
+                    android:id="@+id/id_layananNail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Standar Grooming"/>
+                    android:text="Nail Care"/>
                 <CheckBox
-                    android:id="@+id/id_layananmedical"
+                    android:id="@+id/id_layananTitip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Medical Grooming" />
-                <CheckBox
-                    android:id="@+id/id_layananhealth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Health Grooming" />
+                    android:text="Penitipan" />
             </LinearLayout>
 
             <LinearLayout
@@ -77,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:text="Jenis Kucing"/>
                 <RadioGroup
-                    android:id="@+id/bulu"
+                    android:id="@+id/id_jenisKucing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"

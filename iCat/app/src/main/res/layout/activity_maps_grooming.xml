@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:padding="40dp"
         android:background="@color/white"
         android:elevation="5dp">
@@ -28,7 +29,7 @@
             android:layout_weight="1"
             android:layout_marginVertical="10dp"
             android:layout_marginEnd="20dp"
-            android:text="Pilih lokasi tujuanmu!"/>
+            android:text="Pilih alamat penjemputan kucingmu!"/>
 
         <ImageButton
             android:id="@+id/id_btnlokasiku"

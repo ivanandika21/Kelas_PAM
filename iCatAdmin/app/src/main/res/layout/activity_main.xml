@@ -41,7 +41,7 @@
                 android:id="@+id/id_btnlogout"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/ic_logout"
                 android:tintMode="add"
                 android:background="@android:color/transparent"
                 app:tint="@color/blue_primary"/>

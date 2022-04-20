@@ -28,6 +28,8 @@ public class MasukActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masuk);
 
+        FirebaseAuth.getInstance().signOut();
+
         var_email = findViewById(R.id.id_email);
         var_katasandi = findViewById(R.id.id_katasandi);
 

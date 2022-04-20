@@ -2,13 +2,14 @@ package com.example.icatadmin;
 
 public class Pesanan {
 
-    String id, atasnama, jeniskucing, jenislayanan, tanggal, tujuan, status;
+    String id, atasnama, jenisgrooming, jeniskucing, jenislayanan, tanggal, tujuan, status;
 
     public Pesanan(){}
 
-    public Pesanan(String id, String atasnama, String jeniskucing, String jenislayanan, String tanggal, String tujuan, String status) {
+    public Pesanan(String id, String atasnama, String jenisgrooming, String jeniskucing, String jenislayanan, String tanggal, String tujuan, String status) {
         this.id = id;
         this.atasnama = atasnama;
+        this.jenisgrooming = jenisgrooming;
         this.jeniskucing = jeniskucing;
         this.jenislayanan = jenislayanan;
         this.tanggal = tanggal;
@@ -30,6 +31,14 @@ public class Pesanan {
 
     public void setAtasnama(String atasnama) {
         this.atasnama = atasnama;
+    }
+
+    public String getJenisgrooming() {
+        return jenisgrooming;
+    }
+
+    public void setJenisgrooming(String jenisgrooming) {
+        this.jenisgrooming = jenisgrooming;
     }
 
     public String getJeniskucing() {

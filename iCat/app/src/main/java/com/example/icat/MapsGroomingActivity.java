@@ -128,8 +128,9 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
         Map <String, Object> data_tujuan = new HashMap <> ();
 
         Intent intent = getIntent();
-        String jenislayanan = intent.getStringExtra("jenislayananbaru");
-        String jeniskucing = intent.getStringExtra("jeniskucing");
+        String jenisLayanan = intent.getStringExtra("jenisLayananbaru");
+        String jenisGrooming = intent.getStringExtra("jenisGrooming");
+        String jenisKucing = intent.getStringExtra("jenisKucing");
 
         Date now = Calendar.getInstance().getTime();
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, h:mm a");
@@ -147,8 +148,9 @@ public class MapsGroomingActivity extends AppCompatActivity implements OnMapRead
         order.put("tujuan", var_jalan);
 
         order.put("id", myId);
-        order.put("jenislayanan", jenislayanan);
-        order.put("jeniskucing", jeniskucing);
+        order.put("jenislayanan", jenisLayanan);
+        order.put("jenisgrooming", jenisGrooming);
+        order.put("jeniskucing", jenisKucing);
         order.put("tanggal", currentTime);
         order.put("atasnama", atasnama);
         order.put("status", "Dipesan");

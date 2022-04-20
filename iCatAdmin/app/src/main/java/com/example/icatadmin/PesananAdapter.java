@@ -41,6 +41,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
 
         holder.var_tanggal.setText(pesanan.getTanggal());
         holder.var_atasnama.setText(pesanan.getAtasnama());
+        holder.var_jenisgrooming.setText(pesanan.getJenisgrooming());
         holder.var_jeniskucing.setText(pesanan.getJeniskucing());
         holder.var_jenislayanan.setText(pesanan.getJenislayanan());
         holder.var_tujuan.setText(pesanan.getTujuan());
@@ -56,7 +57,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
                 if (statusPesanan.equals("Meminta pembatalan")) {
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Konfirmasi Pembatalan?")
-                            .setContentText("Status pesanan pelanggan akan berubah menjadi dibatalkan")
+                            .setContentText("Status pesanan akan berubah menjadi dibatalkan")
                             .setConfirmText("Ya")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
@@ -77,17 +78,73 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
                                 }
                             })
                             .show();
-                } else if (statusPesanan.equals("Diproses")){
+                } else if (statusPesanan.equals("Pesanan dibatalkan")){
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("Konfirmasi Pengiriman?")
-                            .setContentText("Status pesanan pelanggan akan berubah menjadi dikirim")
+                            .setTitleText("Pesanan telah dibatalkan!")
+                            .show();
+                } else if (statusPesanan.equals("Pesanan selesai")){
+                    new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
+                            .setTitleText("Pesanan sudah selesai!")
+                            .show();
+                } else if (statusPesanan.equals("Dalam pengantaran")){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Selesaikan Pesanan?")
+                            .setContentText("Status pesanan akan berubah menjadi selesai")
                             .setConfirmText("Ya")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     database.collection("grooming")
                                             .document(myId)
-                                            .update("status", "Dikirim");
+                                            .update("status", "Pesanan selesai");
+                                    sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                } else if (statusPesanan.equals("Dalam proses grooming")){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Konfirmasi Pengantaran?")
+                            .setContentText("Status pesanan akan berubah menjadi dalam pengantaran")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Dalam pengantaran");
+                                    sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                } else if (statusPesanan.equals("Dalam penjemputan")){
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Mulai Grooming?")
+                            .setContentText("Status pesanan akan berubah menjadi dalam proses grooming")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Dalam proses grooming");
                                     sDialog.dismissWithAnimation();
                                     ((MainActivity) context).finish();
                                     Intent refresh = new Intent(context, MainActivity.class);
@@ -104,14 +161,14 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
                 } else {
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Konfirmasi Pesanan?")
-                            .setContentText("Status pesanan pelanggan akan berubah menjadi diproses")
+                            .setContentText("Status pesanan akan berubah menjadi dalam penjemputan")
                             .setConfirmText("Ya")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
                                     database.collection("grooming")
                                             .document(myId)
-                                            .update("status", "Diproses");
+                                            .update("status", "Dalam penjemputan");
                                     sDialog.dismissWithAnimation();
                                     ((MainActivity) context).finish();
                                     Intent refresh = new Intent(context, MainActivity.class);
@@ -136,7 +193,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
     }
 
     public static class GroomingViewHolder extends RecyclerView.ViewHolder {
-        TextView var_tanggal, var_atasnama, var_jeniskucing, var_jenislayanan, var_tujuan, var_status;
+        TextView var_tanggal, var_atasnama, var_jenisgrooming, var_jeniskucing, var_jenislayanan, var_tujuan, var_status;
         LinearLayout var_mainLayout;
 
         public GroomingViewHolder(@NonNull View itemView) {
@@ -144,6 +201,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
 
             var_tanggal = itemView.findViewById(R.id.id_tanggal);
             var_atasnama = itemView.findViewById(R.id.id_atasnama);
+            var_jenisgrooming = itemView.findViewById(R.id.id_jenisgrooming);
             var_jeniskucing = itemView.findViewById(R.id.id_jeniskucing);
             var_jenislayanan = itemView.findViewById(R.id.id_jenislayanan);
             var_tujuan = itemView.findViewById(R.id.id_tujuan);
