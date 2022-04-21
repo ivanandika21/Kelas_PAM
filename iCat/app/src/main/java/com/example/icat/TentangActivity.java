@@ -30,7 +30,7 @@ public class TentangActivity extends AppCompatActivity {
             i.setData(Uri.parse(url));
             startActivity(i);
         });
-        
+
         var_btnTokped = findViewById(R.id.id_btnTokped);
         var_btnTokped.setOnClickListener(view -> {
             String url = "http://www.tokopedia.com/icatlabs/";
