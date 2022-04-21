@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICat">
         <activity
+            android:name=".TentangActivity"
+            android:exported="false" />
+        <activity
             android:name=".LihatPesananActivity"
             android:exported="false" />
 

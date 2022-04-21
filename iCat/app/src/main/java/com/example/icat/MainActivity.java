@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView var_namalengkap;
     private FirebaseUser firebaseUser;
     private ImageView var_btnlogout;
-    private MaterialCardView var_btngrooming, var_btnlayanan, var_btnPesananGrooming, var_btnHubungi;
+    private MaterialCardView var_btngrooming, var_btnlayanan, var_btnPesananGrooming, var_btnabout, var_btnHubungi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         var_btngrooming = findViewById(R.id.id_btngrooming);
         var_btnlayanan = findViewById(R.id.id_btnlayanan);
         var_btnPesananGrooming = findViewById(R.id.id_btnPesananGrooming);
+        var_btnabout = findViewById(R.id.id_btnabout);
         var_btnHubungi = findViewById(R.id.id_btnHubungi);
 
         if (firebaseUser != null) {
@@ -58,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         var_btnPesananGrooming.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), LihatPesananActivity.class));
+        });
+
+        var_btnabout.setOnClickListener(view -> {
+            startActivity(new Intent(getApplicationContext(), TentangActivity.class));
         });
 
         var_btnHubungi.setOnClickListener(view -> {
