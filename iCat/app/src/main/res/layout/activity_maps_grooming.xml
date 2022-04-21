@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsGroomingActivity"
-    android:orientation="vertical">
+    tools:context=".MapsGroomingActivity">
 
     <fragment
         android:id="@+id/map"
@@ -48,5 +47,5 @@
         android:background="@drawable/rounded_btn"
         android:stateListAnimator="@null"
         android:layout_gravity="bottom"
-        android:text="Antar"/>
+        android:text="Pesan"/>
 </FrameLayout>

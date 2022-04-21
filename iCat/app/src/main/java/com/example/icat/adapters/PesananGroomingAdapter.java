@@ -51,33 +51,41 @@ public class PesananGroomingAdapter extends RecyclerView.Adapter<PesananGrooming
 
         database = FirebaseFirestore.getInstance();
         String myId = pesananGrooming.getId();
+        String statusPesanan = pesananGrooming.getStatus();
 
         holder.var_mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Batalkan Pesanan?")
-                        .setContentText("Anda tetap harus menunggu pihak iCat untuk menanggapi!")
-                        .setConfirmText("Ya")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                database.collection("grooming")
-                                        .document(myId)
-                                        .update("status", "Meminta pembatalan");
-                                sDialog.dismissWithAnimation();
-                                ((LihatPesananActivity) context).finish();
-                                Intent refresh = new Intent(context, LihatPesananActivity.class);
-                                context.startActivity(refresh);
-                            }
-                        })
-                        .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                if (statusPesanan.equals("Dipesan")) {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Batalkan Pesanan?")
+                            .setContentText("Anda tetap harus menunggu pihak iCat untuk menanggapi!")
+                            .setConfirmText("Ya")
+                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Meminta pembatalan");
+                                    sDialog.dismissWithAnimation();
+                                    ((LihatPesananActivity) context).finish();
+                                    Intent refresh = new Intent(context, LihatPesananActivity.class);
+                                    context.startActivity(refresh);
+                                }
+                            })
+                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sDialog) {
+                                    sDialog.dismissWithAnimation();
+                                }
+                            })
+                            .show();
+                } else {
+                    new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                            .setTitleText("Pesanan telah diproses!")
+                            .show();
+                }
+
             }
         });
     }

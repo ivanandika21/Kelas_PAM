@@ -14,9 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ICat">
         <activity
-            android:name=".BatalkanActivity"
-            android:exported="false" />
-        <activity
             android:name=".LihatPesananActivity"
             android:exported="false" />
 

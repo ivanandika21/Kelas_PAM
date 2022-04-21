@@ -58,7 +58,7 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
                     new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Konfirmasi Pembatalan?")
                             .setContentText("Status pesanan akan berubah menjadi dibatalkan")
-                            .setConfirmText("Ya")
+                            .setConfirmText("Terima")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
@@ -71,10 +71,16 @@ public class PesananAdapter extends RecyclerView.Adapter<PesananAdapter.Grooming
                                     context.startActivity(refresh);
                                 }
                             })
-                            .setCancelButton("Kembali", new SweetAlertDialog.OnSweetClickListener() {
+                            .setCancelButton("Tolak", new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
+                                    database.collection("grooming")
+                                            .document(myId)
+                                            .update("status", "Dalam Penjemputan");
                                     sDialog.dismissWithAnimation();
+                                    ((MainActivity) context).finish();
+                                    Intent refresh = new Intent(context, MainActivity.class);
+                                    context.startActivity(refresh);
                                 }
                             })
                             .show();
